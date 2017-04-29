@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC  
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" /><!-- /WEB-INF/jsp/footer.jsp -->
+	</definition>
+
+	<definition name="contact" extends="base.definition">
+		<put-attribute name="title" value="Contact Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/contact.jsp" />
+	</definition>
+
+
+	<definition name="homePage" extends="base.definition">
+		<put-attribute name="title" value="Anasayfa" />
+		<put-attribute name="body" value="/WEB-INF/jsp/homePage.jsp" />
+	</definition>
+
+	<definition name="hello" extends="base.definition">
+		<put-attribute name="title" value="Hello Spring MVC" />
+		<put-attribute name="body" value="/WEB-INF/jsp/hello.jsp" />
+	</definition>
+
+	<definition name="Kullanici" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/KullaniciJSP/Kullanici.jsp" />
+	</definition>
+
+	<definition name="sabitler" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/WEB-INF/jsp/Yerler/sabitler.jsp" />
+	</definition>
+
+	<definition name="uruntanimlama" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/UrunlerJSP/uruntanimlama.jsp" />
+	</definition>
+
+	<definition name="musteritanimlama" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/MusterilerJSP/musteritanimlama.jsp" />
+	</definition>
+
+	<definition name="musteriyonetimi" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/MusterilerJSP/musteriyonetimi.jsp" />
+	</definition>
+
+	<definition name="sipariscontrol" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/SiparisJSP/sipariscontrol.jsp" />
+	</definition>
+
+	<definition name="siparislistesi" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/SiparisJSP/siparislistesi.jsp" />
+	</definition>
+	<definition name="siparisonay" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/SiparisJSP/siparisonay.jsp" />
+	</definition>
+	<definition name="siparisver" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/SiparisJSP/siparisver.jsp" />
+	</definition>
+
+
+
+
+</tiles-definitions> 
