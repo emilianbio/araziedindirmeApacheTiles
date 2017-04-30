@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.SessionFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import service.IzinIslemleriService;
-import service.KullaniciService;
-
 import com.google.gson.Gson;
 
 import forms.IzinIslemleri;
 import forms.Kullanici;
+import service.IzinIslemleriService;
+import service.KullaniciService;
 
 /**
  * @author Emrah Denizer
@@ -42,8 +40,6 @@ public class IzinIslemleriController {
 	KullaniciService kullaniciService;
 	@Autowired
 	IzinIslemleriService izinIslemleriService;
-	@Autowired
-	private SessionFactory sessionFactory;
 	private IzinIslemleri izin = null;
 
 	public int toplamİzinHakki = 0;
@@ -52,9 +48,7 @@ public class IzinIslemleriController {
 	public Kullanici kullanici1;
 
 	@RequestMapping(value = "/izin-formu")
-	public ModelAndView izin(
-			@ModelAttribute("izinFormu") IzinIslemleri izinIslem, Long id,
-			ModelMap model) {
+	public ModelAndView izin(@ModelAttribute("izinFormu") IzinIslemleri izinIslem, Long id, ModelMap model) {
 		// Genel.setKullaniciBean(null);
 
 		if (izin == null) {
@@ -124,8 +118,7 @@ public class IzinIslemleriController {
 		nesne.put("istenenIzinGunSayisi", izinler.getTalepEdilenIzinGunSayisi());
 		nesne.put("cepTelefonu", izinler.getPersonelId().getCepTelefonu());
 		nesne.put("ePosta", izinler.getPersonelId().getePosta());
-		nesne.put("yedekPersonelAdi", izinler.getYedekPersonel()
-				.getIsimSoyisim());
+		nesne.put("yedekPersonelAdi", izinler.getYedekPersonel().getIsimSoyisim());
 		// nesne.put("yedekPersonelUnvan",
 		// izinler.getYedekPersonel().getUnvan());
 		array.add(nesne);

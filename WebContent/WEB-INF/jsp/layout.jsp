@@ -25,7 +25,7 @@
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
 
-<%-- <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>"> --%>
+ <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>"> 
 </head>
 <body>
 

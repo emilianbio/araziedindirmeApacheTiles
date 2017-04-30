@@ -134,7 +134,9 @@
 						Bilgileri</a>
 				</div>
 				<div class="nav hakkinda">
-					<a href="#deneme">Hakkinda</a>
+					<a
+						href="${pageContext.request.contextPath}/arazi-cikislari/arac-islemleri">Arazi
+						Çıkışları</a>
 				</div>
 				<div class="nav urunler">
 					<a href="${pageContext.request.contextPath}/yer-ekleme/sabitler">

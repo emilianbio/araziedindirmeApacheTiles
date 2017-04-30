@@ -28,7 +28,7 @@ public class AracController {
 	public String aracTakip(ModelMap model) {
 		model.put("title", "Araç Takip");
 
-		return "AraziCikis/AracTakip";
+		return "AracTakip";
 	}
 
 	@RequestMapping(value = "/araziCikisEkle")

@@ -4,17 +4,31 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- <head>
+<head>
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px"
 	rel="stylesheet">
 <meta charset="utf-8">
+<!--
 <title>DNZR</title>
 <style type="text/css">
-* {
-	margin: 0px;
-	padding: 0px;
-}
+{
+margin
+:
+ 
+0
+px
+;
 
+	
+padding
+:
+ 
+0
+px
+;
+
+
+}
 body, html {
 	
 }
@@ -92,7 +106,7 @@ nav a:HOVER {
 </style>
 
 </head>
-<body>
+ <body>
 	<nav>
 		<a href="#gor1">HOME</a> <a href="#gor2">ABOUT</a> <a href="#gor3">WORKS</a>
 		<a href="#services">SERVICES</a> <a href="#portfolio">PORTFOLIO</a> <a
@@ -233,9 +247,7 @@ nav a:HOVER {
 </section>
 
 <section id="deneme">
-	<BR>
-	<BR>
-	<BR> DENEME SAYFASINA YUKARIDAKİ HAKKINDA LİNKİNE TIKLANARAK
-	ULAŞABİLİRSİNİZ...!!!!
-</section> 
+	<BR> <BR> <BR> DENEME SAYFASINA YUKARIDAKİ HAKKINDA
+	LİNKİNE TIKLANARAK ULAŞABİLİRSİNİZ...!!!!
+</section>
 <!--------------------------------------------------------------------------------------------------------------------->

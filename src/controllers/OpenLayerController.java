@@ -19,6 +19,7 @@ import forms.OpenLayer;
 
 @Controller
 public class OpenLayerController {
+	@SuppressWarnings("unused")
 	@Autowired
 	private OpenLayersService openLayerService;
 
@@ -32,8 +33,7 @@ public class OpenLayerController {
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@RequestMapping(value = "/jsonKaydet")
-	public String jsonKaydet(@RequestParam("data") String str,
-			OpenLayer openLayer) throws ParseException {
+	public String jsonKaydet(@RequestParam("data") String str, OpenLayer openLayer) throws ParseException {
 
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(str);
