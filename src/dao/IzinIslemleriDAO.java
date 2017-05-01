@@ -17,4 +17,6 @@ public interface IzinIslemleriDAO {
 	public List<IzinIslemleri> izinListesi();
 
 	public IzinIslemleri izinGetir(Long id);
+	
+	public void izinSureleriniGuncelle(IzinIslemleri izinIslemleri);
 }

@@ -27,6 +27,12 @@ public class HomeController {
 	public String anasayfa(ModelMap model, String[] args) {
 		// araclar.Main.main(args);
 		model.put("title", "Pahara Anasayfa");
+
+		if (kullanici == null) {
+			kullanici = new Kullanici();
+
+		}
+		model.put("kullanici", kullanici);
 		return "homePage";
 	}
 
@@ -124,7 +130,7 @@ public class HomeController {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html");
 			System.out.println("Giriş Başarılı.." + " " + new Date());
-			return new ModelAndView("redirect:/anasayfa");
+			return new ModelAndView("redirect:/");
 		}
 	}
 }

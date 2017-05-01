@@ -72,7 +72,7 @@ function modelGetir(altTipId) {
 
 function modelleriListele(gelen) {
 	// alert("modellerilistele");
-	var trHTML = '<div class="col-sm-6"><table class="table table-striped"><tr class="success"><th>Sil</th><th>Düzenle</th><th>Sıra No</th><th>İsim</th><th>Ekleme Tarihi</th><th>Durum</th><th>Kaydeden</th></tr></table></div>';
+	var trHTML = '<div class="yerlertable"><table class="yerlertable table table-striped"><tr class="success"><th>Sil</th><th>Düzenle</th><th>Sıra No</th><th>İsim</th><th>Ekleme Tarihi</th><th>Durum</th><th>Kaydeden</th></tr></table></div>';
 	jq
 			.each(
 					gelen,
@@ -101,7 +101,7 @@ function modelleriListele(gelen) {
 								+ '</td></tr>';
 					});
 
-	jq('.table.table-striped').html(trHTML);
+	jq('.yerlertable.table.table-striped').html(trHTML);
 }
 
 function tipsil(id) {

@@ -51,7 +51,7 @@ public class AraziİslemHareketleriController {
 			arazi = new AraziİslemHareketleri();
 		}
 
-		ModelAndView modelAndView = new ModelAndView("SatisCesitleri/Satis");
+		ModelAndView modelAndView = new ModelAndView("Satis");
 
 		modelAndView.addObject("tusYazisi", tusYazisi);
 		modelAndView.addObject("ilceler", araclar.Genel.ilcelers());

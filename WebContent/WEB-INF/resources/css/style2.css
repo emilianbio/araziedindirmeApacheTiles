@@ -81,7 +81,7 @@ a:hover {
 		height: 40px;
 		position: relative;
 		float: left;
-		background: url("../images/pahara.png");
+		background: url("../images/bakanlik.png") no-repeat;
 		cursor: pointer;
 	}
 	#nav-brand {
@@ -270,5 +270,25 @@ a:hover {
 		transition: all .2s ease-in-out;
 		background: url("../images/grass.jpg") no-repeat;
 		background-size: 100% 100%;
+	}
+	.header-yerler {
+		width: 460px;
+		height: auto;
+		margin-top: 40px;
+		position: relative;
+		float: left;
+		background-size: cover;
+		background-color: #c47d31;
+	}
+	.yerlertable {
+		color: white !important;
+	}
+	.header-araccikis table {
+		color: black !important;
+		width: 400px;
+		height: auto;
+		margin-top: 40px;
+		float: left;
+		background-size: cover;
 	}
 }

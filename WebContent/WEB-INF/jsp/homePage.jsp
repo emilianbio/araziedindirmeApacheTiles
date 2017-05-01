@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <link href="https://fonts.googleapis.com/css?family=Slabo+27px"
 	rel="stylesheet">
 <meta charset="utf-8">
-<!--
+
 <title>DNZR</title>
 <style type="text/css">
-{
+#chartContainer {
+	width: 940px;
+	padding: 40px 10px;
+	height: 400px;
+	margin: auto;
+}
+</style>
+<!--{
 margin
 :
  
@@ -143,7 +150,7 @@ nav a:HOVER {
  -->
 
 <!--------------------------------------------------------------------------------------------------------------------->
-<header>
+<%-- <header>
 	<div id="header-container">
 		<div id="header-main">
 			<div id="header-main-buffer"></div>
@@ -247,7 +254,75 @@ nav a:HOVER {
 </section>
 
 <section id="deneme">
-	<BR> <BR> <BR> DENEME SAYFASINA YUKARIDAKİ HAKKINDA
-	LİNKİNE TIKLANARAK ULAŞABİLİRSİNİZ...!!!!
-</section>
+	<BR> <BR> <BR> 
+</section> --%>
 <!--------------------------------------------------------------------------------------------------------------------->
+
+<div id="chartContainer">
+	<div class="brand">
+		<a href="/araziedindirme"><img alt=""
+			src="${pageContext.request.contextPath}/resources/images/gthbLogo2.png"
+			width="65px"></a>
+	</div>
+	<br> LÜTFEN KULLANICI BİLGİLERİNİZİ GİRİNİZ <br>
+	<form:form action="login" method="post" commandName="kullanici"
+		autocomplete="off">
+		<form:hidden path="id" />
+		<table>
+			<tr>
+				<td align="left">Kullanıcı Adınız</td>
+				<td>: <form:input path="isimSoyisim" type="text"
+						style="border-radius: 5px; border: none;"
+						placeholder=" Lütfen adınızı giriniz..!" />
+				</td>
+			</tr>
+			<tr>
+				<td align="left">Şifreniz</td>
+				<td>: <form:input path="sifre" type="password"
+						style="border-radius: 5px; border: none;"
+						placeholder=" Lütfen şifrenizi giriniz..!" />
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value='GİRİŞ' class="btn btn-success">
+	</form:form>
+</div>
+<%-- 
+<!--   -->
+<c:if test="${girisBasarili == '1'}">
+	<script type="text/javascript">
+		$("#uyari").hide();
+	</script>
+</c:if>
+
+<div id='uyari' class="conteiner-fluid"
+	style='z-index: 20000; margin: 0px; padding: 0px; align: center; border-radius: 5px; text-align: center; top: 50%; box-sizing: border-box; left: 50%; border: 2px groove #ff9900; font-size: 20px; display: inline; position: fixed; background-color: white; -webkit-transform: translate(-50%, -50%); opacity: 1; filter: alpha(opacity = 90); width: 100%; height: 100%;'>
+	<div
+		style='text-align: center; position: fixed; top: 10%; box-sizing: border-box; left: 30%; width: auto; height: auto; border: 7px outset #ff8800; border-radius: 10px;'>
+		<div class="brand">
+			<a href="/arazisatis"><img alt=""
+				src="${pageContext.request.contextPath}/assets/gthbLogo.png"
+				width="65px"></a>
+		</div>
+		<BR> LÜTFEN KULLANICI BİLGİLERİNİZİ GİRİNİZ<br>
+		<form action="login" method="get">
+			<table class="table">
+				<tr>
+					<td align="left">Kullanıcı Adınız</td>
+					<td>: <input name="isim" type="text"
+						style="border-radius: 5px; border: none;"
+						placeholder=" Lütfen adınızı giriniz..!">
+					</td>
+				</tr>
+				<tr>
+					<td align="left">Şifreniz</td>
+					<td>: <input name="sifre" type="password"
+						style="border-radius: 5px; border: none;"
+						placeholder=" Lütfen şifrenizi giriniz..!">
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value='GİRİŞ' class="btn btn-success">
+		</form>
+	</div>
+</div> --%>

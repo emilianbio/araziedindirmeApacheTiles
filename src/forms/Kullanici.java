@@ -65,6 +65,9 @@ public class Kullanici implements Serializable {
 
 	@Column(name = "durum")
 	private char durum;
+	
+	@Column(name = "izin_hakki")
+	private Integer izinHakki;
 
 	public long getId() {
 		return id;
@@ -136,6 +139,14 @@ public class Kullanici implements Serializable {
 
 	public void setDurum(char durum) {
 		this.durum = durum;
+	}
+
+	public Integer getIzinHakki() {
+		return izinHakki;
+	}
+
+	public void setIzinHakki(Integer izinHakki) {
+		this.izinHakki = izinHakki;
 	}
 
 }

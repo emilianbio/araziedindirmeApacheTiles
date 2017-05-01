@@ -110,7 +110,6 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 
 	public int getEvrakNo() {
 
-		
 		return evrakNo;
 	}
 

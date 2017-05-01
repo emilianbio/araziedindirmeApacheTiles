@@ -140,6 +140,7 @@ public class AraziDAOImpl implements AraziDAO {
 			jsonObject.put("izinVerilmeyenParselAlani",
 					tip.getIzinVerilmeyenParselAlani());
 			jsonObject.put("nitelik", tip.getNitelik());
+			jsonObject.put("evrakTarihi", tip.getTarih());
 			if (tip.getIslemTipi() == "SATIŞ") {
 				jsonObject.put("islemTipi", tip.getIslemTipi() + " (5403)");
 			} else {
@@ -164,5 +165,57 @@ public class AraziDAOImpl implements AraziDAO {
 		crt.setProjection(Projections.max("id"));
 		Long id = (Long) crt.uniqueResult();
 		return id;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public JSONArray ayalaraGoreToplamGetir(String yil, String birinciAy,
+			String ikinciAy, String ucuncuAy) {
+
+		String[] yilKismi = yil.split("-");
+		String year = yilKismi[0];
+				
+
+		Criteria criteriaDemirbas = sessionFactory.getCurrentSession()
+				.createCriteria(AraziİslemHareketleri.class);
+
+		criteriaDemirbas.add(Restrictions.eq("tarih", year));
+		criteriaDemirbas.add((Restrictions.disjunction().add(Restrictions
+				.or(Restrictions.eq("tarih", birinciAy))
+				.add(Restrictions.eq("tarih", ikinciAy))
+				.add(Restrictions.eq("tarih", ucuncuAy)))));
+
+		JSONArray donecek = new JSONArray();
+		List<AraziİslemHareketleri> araziIslemListesi = new ArrayList<AraziİslemHareketleri>();
+		araziIslemListesi = criteriaDemirbas.list();
+		Iterator<AraziİslemHareketleri> iterator = araziIslemListesi.iterator();
+		while (iterator.hasNext()) {
+			JSONObject jsonObject = new JSONObject();
+			AraziİslemHareketleri tip = iterator.next();
+
+			jsonObject.put("devriIstenenParselSayisi",
+					tip.getDevriIstenenParselSayisi());
+			jsonObject.put("devriIstenenParselAlani",
+					tip.getDevriIstenenParselAlani());
+			jsonObject.put("izinVerilenParselSayisi",
+					tip.getIzinVerilenParselSayisi());
+			jsonObject.put("izinVerilenParselAlani",
+					tip.getIzinVerilenParselAlani());
+			jsonObject.put("izinVerilmeyenParselSayisi",
+					tip.getIzinVerilmeyenParselSayisi());
+			jsonObject.put("izinVerilmeyenParselAlani",
+					tip.getIzinVerilmeyenParselAlani());
+			jsonObject.put("nitelik", tip.getNitelik());
+
+			// donecek.add(tip.getAlisFiyati());
+			// donecek.add(tip.getHisseFiyati());
+			// donecek.add(tip.getSatisFiyati());
+			// donecek.add(tip.getHayvanNo());
+			donecek.add(jsonObject);
+		}
+
+		return (donecek);
+
 	}
 }

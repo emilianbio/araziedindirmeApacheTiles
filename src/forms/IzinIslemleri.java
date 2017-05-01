@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -44,7 +45,7 @@ public class IzinIslemleri implements java.io.Serializable {
 	@Column(name = "izinden_donus_tarhi")
 	private String izindenDonusTarihi;
 
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "yerine_bakacak_personel")
 	private Kullanici yedekPersonel;
 
@@ -63,6 +64,8 @@ public class IzinIslemleri implements java.io.Serializable {
 
 	@Column(name = "mazeret_nedeni")
 	private String mazeretNedeni;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -73,8 +76,8 @@ public class IzinIslemleri implements java.io.Serializable {
 	}
 
 	public Kullanici getPersonelId() {
-		if(personelId==null)
-		personelId = new Kullanici();
+		if (personelId == null)
+			personelId = new Kullanici();
 		return personelId;
 	}
 
@@ -115,8 +118,8 @@ public class IzinIslemleri implements java.io.Serializable {
 	}
 
 	public Kullanici getYedekPersonel() {
-		if(yedekPersonel==null)
-		yedekPersonel = new Kullanici();
+		if (yedekPersonel == null)
+			yedekPersonel = new Kullanici();
 		return yedekPersonel;
 	}
 

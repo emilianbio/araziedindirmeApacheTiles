@@ -118,7 +118,7 @@
 
 			<div id="nav-logo"></div>
 			<div id="nav-brand">
-				<a href="?">pahara online</a>
+				<a href="?">Arazi Edindirme Şube Müdürlüğü</a>
 			</div>
 
 			<div id="nav-container">
@@ -130,8 +130,8 @@
 					<a href="${pageContext.request.contextPath}/">Sisteme Giriş</a>
 				</div>
 				<div class="nav iletisim">
-					<a href="${pageContext.request.contextPath}/">İletişim
-						Bilgileri</a>
+					<a href="${pageContext.request.contextPath}/satis-cesitleri/satis">Satış
+						İşlemleri</a>
 				</div>
 				<div class="nav hakkinda">
 					<a
