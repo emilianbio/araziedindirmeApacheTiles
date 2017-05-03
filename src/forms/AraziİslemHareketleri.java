@@ -35,7 +35,7 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 	private String ilce;
 
 	@Column(name = "evrak_no")
-	private int evrakNo;
+	private long evrakNo;
 
 	@Column(name = "mahalle")
 	private String mahalle;
@@ -108,12 +108,12 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 		this.ilce = ilce;
 	}
 
-	public int getEvrakNo() {
+	public long getEvrakNo() {
 
 		return evrakNo;
 	}
 
-	public void setEvrakNo(int evrakNo) {
+	public void setEvrakNo(long evrakNo) {
 		this.evrakNo = evrakNo;
 	}
 

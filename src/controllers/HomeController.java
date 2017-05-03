@@ -130,7 +130,7 @@ public class HomeController {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html");
 			System.out.println("Giriş Başarılı.." + " " + new Date());
-			return new ModelAndView("redirect:/");
+			return new ModelAndView("redirect:/satis-cesitleri/satis");
 		}
 	}
 }

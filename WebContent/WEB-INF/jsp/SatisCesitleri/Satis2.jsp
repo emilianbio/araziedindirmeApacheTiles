@@ -57,7 +57,7 @@ label {
 </style>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	var jq = jQuery.noConflict();
 	var id = parseInt('${araziIslem.id}');
 	jq("#yanlisBilgi").hide();
@@ -399,7 +399,7 @@ label {
 		jq("#yanlisBilgi").hide();
 
 	}
-</script>
+</script> -->
 <br>
 <br>
 <br>
@@ -469,18 +469,18 @@ label {
 				<td>Alan (m<sup>2</sup>)
 				</td>
 			</tr>
-
+			
 			<%-- <c:if test="${tusYazisi == 'Kaydet'}"> --%>
 			<tr style="background-color: #ffd480" id="kaydet">
-				<td colspan="12"><input id="kaydetBtn" type="button"
-					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
+				<td colspan="12"><input id="kaydetBtn" type="submit"
+					class="btn btn-success" value="${tusYazisi }"
 					style="border: none; background-color: #e68a00"></td>
 			</tr>
 			<%-- </c:if>
 			<c:if test="${tusYazisi == 'Güncelle'}"> --%>
 			<tr style="background-color: #ffd480" id="guncelle">
 				<td colspan="12"><input id="guncelleBtn" type="button"
-					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
+					class="btn btn-success" value="${tusYazisi }"
 					style="border: none; background-color: #80bfff"> <input
 					type="button" class="btn btn-success" value="Vazgeç"
 					onclick="javascript:location.href='./vazgec'"
