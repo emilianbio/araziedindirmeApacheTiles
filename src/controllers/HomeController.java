@@ -89,6 +89,7 @@ public class HomeController {
 		return modelAndView;
 	}
 
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/login")
 	public ModelAndView kullaniciOnay(@ModelAttribute("kullanici") Kullanici kullanici,
 			@RequestParam(value = "isimSoyisim") String isim, @RequestParam(value = "sifre") String sifre,
@@ -105,6 +106,10 @@ public class HomeController {
 		Kullanici kayitliKullanici = kullaniciService.kullaniciGiris(isim, sifre);
 		System.out.println(kullanici.getIsimSoyisim());
 		System.out.println("logine basıldı" + " " + new Date());
+
+		String isim0 = kayitliKullanici.getAdi();
+		String[] ilkisim = isim0.split(" ");
+
 		if (kayitliKullanici == null) {
 			request.setCharacterEncoding("UTF-8");
 			JOptionPane panel = new JOptionPane();
@@ -115,7 +120,7 @@ public class HomeController {
 		} else {
 
 			Cookie cookieId = new Cookie("id", Long.toString(kayitliKullanici.getId()));
-			Cookie cookieIsim = new Cookie("isim", kayitliKullanici.getIsimSoyisim());
+			Cookie cookieIsim = new Cookie("isim", ilkisim[0]);
 
 			// response.setCharacterEncoding("UTF-8");
 			String valueId = URLDecoder.decode(cookieId.getValue(), "UTF-8");

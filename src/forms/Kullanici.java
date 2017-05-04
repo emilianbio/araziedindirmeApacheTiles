@@ -28,6 +28,9 @@ public class Kullanici implements Serializable {
 
 	@Column(name = "isim_soyisim")
 	private String isimSoyisim;
+	
+	@Column(name = "adi")
+	private String adi;
 
 	@Column(name = "sifre")
 	private String sifre;
@@ -147,6 +150,14 @@ public class Kullanici implements Serializable {
 
 	public void setIzinHakki(Integer izinHakki) {
 		this.izinHakki = izinHakki;
+	}
+
+	public String getAdi() {
+		return adi;
+	}
+
+	public void setAdi(String adi) {
+		this.adi = adi;
 	}
 
 }
