@@ -5,65 +5,15 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-input {
-	width: 5em;
-}
-
-.date {
-	width: 9em;
-}
-
-label {
-	display: inline-block;
-}
-
-#chartContainer {
-	width: 940px;
-	padding: 0 10px;
-	height: 400px;
-	position: relative;
-	margin: auto;
-	color: red;
-}
-
-#islemTablosu a {
-	color: black !important;
-}
-
-#islemTablosu a:HOVER {
-	color: red !important;
-}
-
-#yanlisBilgi {
-	color: black !important;
-	z-index: 20000;
-	display: none;
-	border-radius: 5px;
-	text-align: center;
-	top: 50%;
-	left: 50%;
-	box-sizing: border-box;
-	border: 5px groove #ffb3d1;
-	font-size: 20px;
-	position: fixed;
-	background-color: white;
-	-webkit-transform: translate(-50%, -50%);
-	opacity: 1;
-	filter: alpha(opacity = 90);
-	width: 70%;
-	height: 35%;
-}
-</style>
-
-
 <script type="text/javascript">
 	var jq = jQuery.noConflict();
 	var id = parseInt('${araziIslem.id}');
 	jq("#yanlisBilgi").hide();
-
+	jq(".xx1").remove();
 	jq(document).ready(
+
 			function() {
+
 				console.log("güncellenecek Id: " + id);
 				/* console.log(jq("#satirno" + id)); */
 				if (id == 0) {
@@ -400,10 +350,65 @@ label {
 
 	}
 </script>
-<br>
-<br>
-<br>
+<style>
+select {
+	background: transparent;
+	-webkit-appearance: none;
+}
 
+option {
+	background: transparent;
+	-webkit-appearance: none;
+}
+
+input {
+	width: 5em;
+}
+
+.date {
+	width: 9em;
+}
+
+label {
+	display: inline-block;
+}
+
+#islemTablosu td {
+	color: white;
+	filter: alpha(opacity : 1);
+	KHTMLOpacity: 0.40;
+	MozOpacity: 0.40;
+	opacity: 1;
+}
+
+#islemTablosu a {
+	color: white !important;
+}
+
+#islemTablosu a:HOVER {
+	color: red !important;
+}
+
+#yanlisBilgi {
+	color: black !important;
+	z-index: 20000;
+	display: none;
+	border-radius: 5px;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	box-sizing: border-box;
+	border: 5px groove #ffb3d1;
+	font-size: 20px;
+	position: fixed;
+	background-color: white;
+	-webkit-transform: translate(-50%, -50%);
+	opacity: 1;
+	filter: alpha(opacity = 90);
+	width: 70%;
+	height: 35%;
+}
+</style>
 
 
 <div id="chartContainer" style="border: 1px; border-color: red;">
@@ -438,8 +443,8 @@ label {
 	<form:form action="ekle" method="GET" commandName="araziIslem"
 		id="myForm">
 		<form:hidden path="id" />
-		<table border="1" class="table"
-			style="text-align: center; color: black;" id="islemTablosu">
+		<table class="table" style="text-align: center; color: black;"
+			id="islemTablosu">
 			<tr align="center" style="text-align: center">
 				<td colspan="12">TARIM ARAZİLERİNİN <strong><label
 						style="text-align: center;" id="tipLabelTxt"> &nbsp;</label> </strong>

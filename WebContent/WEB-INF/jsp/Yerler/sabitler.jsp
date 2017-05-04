@@ -5,17 +5,17 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div class="header-yerler">
 
+
+
+<div class="header-yerler">
 	<form:form method="get" action="sabitonay" commandName="tips"
 		class="form-inline">
 		<form:hidden path="id" />
 		<div class="col-sm-8">
 			<table clAss="table">
-
 				<tr>
 					<td><label> ÜLKE</label></td>
-
 					<td><form:select path="tip.tip.tip.id" class="form-control"
 							onChange="ikisibirada(this.value)" id="slctTipler">
 							<form:option value="0">Seçiniz</form:option>
@@ -23,7 +23,6 @@
 								itemLabel="isim" />
 						</form:select></td>
 				</tr>
-
 				<tr>
 					<td><form:label path="id">Şehir</form:label></td>
 					<td><form:select path="tip.tip.id" id="slctAltTip"
@@ -100,4 +99,4 @@
 		</tr>
 	</c:forEach>
 </table>
-
+${sayfa}

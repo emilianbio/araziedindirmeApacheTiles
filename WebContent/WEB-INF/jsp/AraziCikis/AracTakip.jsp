@@ -5,22 +5,48 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<style>
+
+
+select {
+	background: transparent;
+	-webkit-appearance: none;
+	border: none;
+	outline: none;
+}
+
+option {
+	background: transparent;
+	-webkit-appearance: none;
+}
+
+.table td {
+	color: white;
+}
+
+/* .table {
+	position: relative;
+	float: left:
+} */
+</style>
 <div class="header-araccikis">
-	<table>
+	<table >
 		<tr>
-			<td rowspan="2">PERSONEL</td>
-			<td rowspan="2">ARAÇ PLAKASI</td>
-			<td rowspan="2">ÖZEL ARAÇ</td>
-			<td colspan="2">GİDİLEN YER</td>
-			<td ROWspan="2">TARİH</td>
-			<td rowspan="2">ÇIKIŞ SAATİ</td>
-			<td rowspan="2">GİRİŞ SAATİ</td>
-			<td rowspan="2">İŞİN ÖZETİ</td>
+			<td rowspan="2">Personel</td>
+			<td rowspan="2">Araç Plakası</td>
+			<td rowspan="2">Özel Araç</td>
+			<td colspan="2"
+				style="text-align: center; border-bottom: 1px solid black">Gidilen
+				Yer</td>
+			<td ROWspan="2">Tarih</td>
+			<td rowspan="2">Çıkış Saati</td>
+			<td rowspan="2">Giriş Saati</td>
+			<td rowspan="2">İşin Özeti</td>
 		</tr>
 		<tr>
 
-			<td>İLÇE</td>
-			<td>MAHALLE</td>
+			<td>İlçe</td>
+			<td>Mahalle</td>
 
 		</tr>
 		<form:form class="form-inline">

@@ -19,7 +19,7 @@ html, body {
 
 #chartContainer {
 	border-bottom: 2px solid grey;
-	margin: 15% 35%;
+	margin: 5% 35%;
 	padding: 20px;
 	padding-bottom: 0px;
 }
