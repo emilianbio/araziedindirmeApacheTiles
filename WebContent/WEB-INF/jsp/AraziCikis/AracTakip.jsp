@@ -6,8 +6,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <style>
-
-
 select {
 	background: transparent;
 	-webkit-appearance: none;
@@ -23,14 +21,9 @@ option {
 .table td {
 	color: white;
 }
-
-/* .table {
-	position: relative;
-	float: left:
-} */
 </style>
 <div class="header-araccikis">
-	<table >
+	<table>
 		<tr>
 			<td rowspan="2">Personel</td>
 			<td rowspan="2">Araç Plakası</td>

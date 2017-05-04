@@ -89,7 +89,9 @@ a:hover {
 		float: right;
 	}
 	.nav a:hover {
-		background: rgba(50, 50, 50, .20);
+		background: rgba(255, 80, 0, .45);
+		border-top-right-radius: .5em;
+		border-bottom-right-radius: .5em;
 	}
 	#nav-logo {
 		width: 97px;
@@ -293,10 +295,10 @@ a:hover {
 		width: 460px;
 		height: auto;
 		margin-top: 83px;
-		position: relative;
+		position: absolute;
 		float: left;
 		background-size: cover;
-		background-color: #c47d31;
+		background-color: rgba(50,50,50,.5);
 	}
 	.yerlertable {
 		color: white !important;
@@ -318,21 +320,21 @@ a:hover {
 		background: transparent;
 		width: 7em;
 		height: 25px;
-		border-left:none;
+		border-left: none;
 		border-top:none;
+		border-bottom-color:rgba(50,50,50,.4);
+		border-right-color:rgba(50,50,50,.4);
 		outline: none;
 		
 	}
 	#chartContainer {
 		right: 0px;
 		left: 0px;
-		width: 98%;
+		width: 100%;
 		padding: 0 5px;
 		height: auto;
 		position: absolute;
 		background: rgba(50, 50, 50, 0.5);
-		padding: 0 10px;
-		width: 100%;
 	}
 	.table {
 		color: black !important;
@@ -344,9 +346,6 @@ a:hover {
 		border-collapse: inherit;
 	}
 	#islemTablosu tr:hover {
-		background: rgba(50, 50, 50, 0.8);
-	}
-	#islemTablosu tr td:hover {
 		background: rgba(50, 50, 50, 0.8);
 	}
 }

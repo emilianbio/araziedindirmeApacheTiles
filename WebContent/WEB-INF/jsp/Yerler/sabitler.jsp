@@ -13,7 +13,7 @@
 		class="form-inline">
 		<form:hidden path="id" />
 		<div class="col-sm-8">
-			<table clAss="table">
+			<table clAss="table1">
 				<tr>
 					<td><label> ÜLKE</label></td>
 					<td><form:select path="tip.tip.tip.id" class="form-control"
