@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="Content-Type"
 	content="application/vnd.ms-excel; charset=UTF-8">
-<link rel="shortcut icon" href="<c:url value="/resources/images/pahara.png"/>" />
+<link rel="shortcut icon" href="<c:url value="/resources/images/bakanlik.png"/>" />
 <title>${title}&nbsp;|&nbsp;PaharaOnline</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

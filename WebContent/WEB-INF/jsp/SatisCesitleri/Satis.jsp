@@ -469,7 +469,46 @@ label {
 				<td>Alan (m<sup>2</sup>)
 				</td>
 			</tr>
-
+<tr>
+				<td><form:input path="islemTipi" id="satisTipi"
+						style="border: none;" readonly="readonly"
+						placeHolder="Satış Tipi..." /></td>
+				<td width="300px"><form:input id="date" type="date"
+						path="tarih" style="border: none;" placeholder="Tarih......" /></td>
+				<td><form:select style="border: none;" path="ilce" id="ilce">
+						<form:option value="NONE" label="--- Seçiniz ---" />
+						<form:options items="${ilceler}" />
+					</form:select></td>
+				<td><form:input id="evrakNo" style="border: none;"
+						placeholder="Evrak No" path="evrakNo" /></td>
+				<td><form:input id="mahalle" style="border: none;"
+						placeholder="Mahalle" path="mahalle" /></td>
+				<td><form:input id="devriIstenenParselSayisi"
+						style="border: none;" placeholder="Parsel Sayısı"
+						path="devriIstenenParselSayisi" /></td>
+				<td><form:input id="devriIstenenParselAlani"
+						style="border: none;" placeholder="Alan(m²)"
+						path="devriIstenenParselAlani" /></td>
+				<td><form:input id="izinVerilenParselSayisi"
+						style="border: none;" placeholder="Parsel Sayısı"
+						path="izinVerilenParselSayisi" /></td>
+				<td><form:input id="izinVerilenParselAlani"
+						style="border: none;" placeholder="Alan(m²)"
+						path="izinVerilenParselAlani" /></td>
+				<td><form:input id="izinVerilmeyenParselSayisi"
+						style="border: none;" placeholder="Parsel Sayısı"
+						path="izinVerilmeyenParselSayisi" /></td>
+				<td><form:input id="izinVerilmeyenParselAlani"
+						style="border: none;" placeholder="Alan(m²)"
+						path="izinVerilmeyenParselAlani" /></td>
+				<td><form:select style="border: none;" path="nitelik"
+						id="nitelik">
+						<form:option value="Satış">Satış</form:option>
+						<form:option value="İntikal">İntikal</form:option>
+					</form:select> <!-- <input id="nitelik"
+					style="border: none; size: 5px; margin: 0px; padding: 0px;"
+					placeholder="Nitelik" name="nitelik">--></td>
+			</tr>
 			<%-- <c:if test="${tusYazisi == 'Kaydet'}"> --%>
 			<tr style="background-color: #ffd480" id="kaydet">
 				<td colspan="12"><input id="kaydetBtn" type="button"
