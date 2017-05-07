@@ -114,11 +114,18 @@
 
 <body>
 	<nav>
-		<div id="nav">
+		<div id="kullanicibilgileri">
 
+
+			<div id="cookie" class="block">
+				<a href="#"><span>${cookie.isim.value }</span></a>
+			</div>
+			<div class="block" id="kullaniciAdiTxt">Kullanıcı Adı:</div>
+		</div>
+		<div id="nav">
 			<div id="nav-logo"></div>
 			<div id="nav-brand">
-				<a href="?">ARAZİ EDİNDİRME ŞB. MD.</a>
+				<a href="?">ARAZİ EDİNDİRME ŞB. MD.</a><br>
 			</div>
 
 			<div id="nav-container">
@@ -126,10 +133,7 @@
 				<div id="nav-bar-container">
 					<div id="nav-bar"></div>
 				</div>
-				<div class="nav raporlar">
-					<a href="${pageContext.request.contextPath}/raporlar/satisrapor">
-						Raporlar</a>
-				</div>
+
 
 				<div class="nav cikis">
 					<a href="${pageContext.request.contextPath}/"><span
@@ -148,7 +152,10 @@
 					<a href="${pageContext.request.contextPath}/yer-ekleme/sabitler">
 						Mahalle Ekleme</a>
 				</div>
-
+				<div class="nav raporlar">
+					<a href="${pageContext.request.contextPath}/raporlar/satisrapor">
+						Raporlar</a>
+				</div>
 
 
 			</div>

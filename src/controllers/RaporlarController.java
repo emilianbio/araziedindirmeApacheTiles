@@ -1,9 +1,11 @@
 package controllers;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,10 +13,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -24,6 +27,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +56,7 @@ public class RaporlarController {
 	public String islemTipi = "";
 	public AraziİslemHareketleri arazi;
 	public String dosyaDurumu = null;
+	public String download = "";
 
 	@RequestMapping(value = "/satisrapor")
 	public ModelAndView giris(@ModelAttribute("araziIslem") AraziİslemHareketleri araziİslemHareketleri, ModelMap model,
@@ -129,7 +134,9 @@ public class RaporlarController {
 		modelAndView.addObject("izinVerilmeyenParselAlani", izinVerilmeyenParselAlaniToplami);
 		modelAndView.addObject("ilceler", araclar.Genel.ilcelers());
 		modelAndView.addObject("aylar", araclar.Genel.aylar());
-
+		modelAndView.addObject("download", download);
+		download = "";
+		dosyaDurumu = null;
 		return modelAndView;
 	}
 
@@ -300,23 +307,23 @@ public class RaporlarController {
 		List<Arac> cikisListesi = aracService.tumAracCikislari();
 		String[] isimAyrac = isim.split("\\.");
 		String ayrilanIsim = isimAyrac[0];
+		String ayrilanSoyIsim = isimAyrac[1];
 		System.out.println("çıkış listesi uzunluğu " + cikisListesi.size());
-		String path = "C:\\Users\\EMRAHH\\Desktop\\";
+		String path = "D:\\PROGRAMLAR\\apache-tomcat-9.0.0.M17\\evraklar\\";
 		XWPFDocument document = new XWPFDocument();
 
 		// ustbaslik logo
-		//FileInputStream is = new FileInputStream(path + "bakanlik.png");
+		// FileInputStream is = new FileInputStream(path + "bakanlik.png");
 		// document.addPictureData(is, 0);
 
 		// create table
 		XWPFTable table = document.createTable();
-		//table.setCellMargins(10, 10, 10, 10);
+		// table.setCellMargins(10, 10, 10, 10);
 
 		// üstbaşlık oluşturma
-		XWPFParagraph ustbaslik = document.createParagraph();
-		XWPFRun run = ustbaslik.createRun();
-		run.setText("GIDA TARIM VE AHYVANCILIK BAKANLIĞI");
-		run.addBreak();
+		XWPFTableRow tableUstBaslik = table.getRow(0);
+		tableUstBaslik.getCell(0).setText("GIDA TARIM VE HAYVANCILIK BAKANLIĞI");
+		;
 
 		// create first row
 		XWPFTableRow tableRowOne = table.getRow(0);
@@ -356,13 +363,14 @@ public class RaporlarController {
 		System.out.println(isim);
 		Date tarih = new Date();
 		System.out.println(sdf.format(tarih));
-
+		// path +
 		try {
 			FileOutputStream out = new FileOutputStream(
-					path + ayrilanIsim.toUpperCase() + "-" + sdf.format(tarih) + ".docx");
+					path + ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx");
 			document.write(out);
 			out.close();
 			dosyaDurumu = "Dosya Başarıyla Oluşturuldu...";
+			download = "DOLU";
 			System.out.println("dosya oluşturuldu...");
 			return "redirect:/raporlar/satisrapor";
 		} catch (Exception e) {
@@ -374,4 +382,25 @@ public class RaporlarController {
 
 	}
 
+	@RequestMapping(value = "/download")
+	public String downloadPOIDoc(HttpServletResponse response, @CookieValue(value = "isim") String isim)
+			throws IOException {
+		String[] isimAyrac = isim.split("\\.");
+		String ayrilanIsim = isimAyrac[0];
+		String ayrilanSoyIsim = isimAyrac[1];
+		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
+				+ ".docx"/* path to a file */;
+		String path = "D:\\PROGRAMLAR\\apache-tomcat-9.0.0.M17\\evraklar\\";
+		File file = new File(path + filename);
+
+		response.setContentType(new MimetypesFileTypeMap().getContentType(file));
+		response.setContentLength((int) file.length());
+		response.setHeader("content-disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
+
+		InputStream is = new FileInputStream(file);
+		FileCopyUtils.copy(is, response.getOutputStream());
+
+		return null;
+
+	}
 }

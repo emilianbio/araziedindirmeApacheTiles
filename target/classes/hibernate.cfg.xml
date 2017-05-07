@@ -12,6 +12,7 @@
 		<mapping class="forms.IzinHareketleri" />
 		<mapping class="forms.Arac" />
 		<mapping class="forms.Yerler" />
+		<mapping class="forms.SeyyarGorev" />
 		<!-- <mapping class="forms.Birimler" /> -->
 	</session-factory>
 

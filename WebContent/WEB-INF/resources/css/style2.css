@@ -38,14 +38,36 @@ a:hover {
 @media screen and ( min-width :960px) {
 	nav {
 		width: 100%;
-		height: 80px;
+		height: 113px;
 		position: relative;
 		background: transparent;
 		z-index: 1000;
 		border-bottom: 3px solid grey;
 	}
+	#kullaniciBilgileri {
+		height:30px;
+		width: 100%;
+		border-bottom: 3px solid grey;
+		position: relative;
+	}
+	div.block {
+		display: block !impotant;
+	}
+	#cookie a {
+		height: 30px;
+		float: right;
+		margin-right: 10%;
+		text-align: center;
+		line-height: 30px;
+	}
+	#kullaniciAdiTxt {
+		height: 30px;
+		float: right;
+		text-align: center;
+		line-height: 30px;
+	}
 	#nav {
-		width: 980px;
+		width: 100%;
 		height: 80px;
 		position: relative;
 		margin: auto;
@@ -55,8 +77,8 @@ a:hover {
 		height: 80px;
 		position: relative;
 		float: right;
-		margin-right: 0px;
-		padding-left: 30px;
+		margin-right: 10px;
+		/* padding-left: 30px; */
 	}
 	#nav-bar-container {
 		width: 484px;
@@ -97,7 +119,7 @@ a:hover {
 		color: white !important;
 		width: 120px;
 		height: 77px;
-		background: rgba(255, 250, 0, .45);
+		background: rgba(255, 250, 0, .45) cover;
 	}
 	#nav-logo {
 		width: 97px;
@@ -108,7 +130,7 @@ a:hover {
 		background: url("../images/bakanlik.png") no-repeat;
 		cursor: pointer;
 		text-align: center;
-		float: left;
+		margin-left: 50px;
 	}
 	#nav-brand {
 		height: 80px;
@@ -117,21 +139,20 @@ a:hover {
 		cursor: pointer;
 		line-height: 80px;
 		text-align: center;
-		margin-left: 0px;
+		margin-left: 10px;
 		padding-left: 0px;
 		text-decoration: none;
 	}
-	/* .nav {
+	.nav {
 		width: 120px;
 		height: 37px;
 		line-height: 36px;
 		position: relative;
 		float: right;
-		border-right: 1px solid black;
 		text-align: center;
 		cursor: pointer;
 		transition: all .2s ease-in-out;
-	} */
+	}
 	.nav-last-child {
 		border-left: 1px solid black;
 		position: relative;

@@ -585,6 +585,9 @@
 			</tr>
 			<tr>
 				<td><a href="../raporlar/raporAl">TÜM ÇIKIŞ RAPORLARI</a></td>
+				<c:if test="${!empty download }">
+					<td><a href="../raporlar/download">İNDİR</a></td>
+				</c:if>
 			</tr>
 			<tr>
 				<td>${dosyaDurumu}</td>
