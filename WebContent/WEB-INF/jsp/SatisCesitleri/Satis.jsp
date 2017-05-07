@@ -5,65 +5,15 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style>
-input {
-	width: 5em;
-}
-
-.date {
-	width: 9em;
-}
-
-label {
-	display: inline-block;
-}
-
-#chartContainer {
-	width: 940px;
-	padding: 0 10px;
-	height: 400px;
-	position: relative;
-	margin: auto;
-	color: red;
-}
-
-#islemTablosu a {
-	color: black !important;
-}
-
-#islemTablosu a:HOVER {
-	color: red !important;
-}
-
-#yanlisBilgi {
-	color: black !important;
-	z-index: 20000;
-	display: none;
-	border-radius: 5px;
-	text-align: center;
-	top: 50%;
-	left: 50%;
-	box-sizing: border-box;
-	border: 5px groove #ffb3d1;
-	font-size: 20px;
-	position: fixed;
-	background-color: white;
-	-webkit-transform: translate(-50%, -50%);
-	opacity: 1;
-	filter: alpha(opacity = 90);
-	width: 70%;
-	height: 35%;
-}
-</style>
-
-
 <script type="text/javascript">
 	var jq = jQuery.noConflict();
 	var id = parseInt('${araziIslem.id}');
 	jq("#yanlisBilgi").hide();
-
+	jq(".xx1").remove();
 	jq(document).ready(
+
 			function() {
+
 				console.log("güncellenecek Id: " + id);
 				/* console.log(jq("#satirno" + id)); */
 				if (id == 0) {
@@ -400,13 +350,76 @@ label {
 
 	}
 </script>
-<br>
-<br>
-<br>
+<!-- <style>
+select {
+	background: transparent;
+	-webkit-appearance: none;
+}
+
+option {
+	background: transparent;
+	-webkit-appearance: none;
+}
+
+input {
+	width: 150px;
+	background: transparent;
+	border-left: none;
+	border-top: none;
+	border-bottom-color: rgba(50, 50, 50, .4);
+	border-right-color: rgba(50, 50, 50, .4);
+	outline: none;
+}
+
+.date {
+	width: 9em;
+}
+
+label {
+	display: inline-block;
+}
+
+#islemTablosu td {
+	color: white;
+	filter: alpha(opacity : 1);
+	KHTMLOpacity: 0.40;
+	MozOpacity: 0.40;
+	opacity: 1;
+}
+
+#islemTablosu a {
+	color: white !important;
+}
+
+#islemTablosu a:HOVER {
+	color: red !important;
+}
 
 
+</style> -->
+<style>
+#yanlisBilgi {
+	color: black !important;
+	z-index: 20000;
+	display: none;
+	border-radius: 5px;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	box-sizing: border-box;
+	border: 5px groove #ffb3d1;
+	font-size: 20px;
+	position: fixed;
+	background-color: white;
+	-webkit-transform: translate(-50%, -50%);
+	opacity: 1;
+	filter: alpha(opacity = 90);
+	width: 70%;
+	height: 35%;
+}
+</style>
 
-<div id="chartContainer" style="border: 1px; border-color: red;">
+<div class="header-satis">
 	<select id="tipSelect" style="border: none;" name="islemTipi"
 		onchange="islemTipineGöreTabloGetir(this.value);tipDegistir()">
 		<option value="0">Lütfen İşlem Tipini Seçiniz..---</option>
@@ -435,41 +448,42 @@ label {
 			</tr>
 		</table>
 	</div>
-	<form:form action="ekle" method="GET" commandName="araziIslem"
-		id="myForm">
-		<form:hidden path="id" />
-		<table border="1" class="table"
-			style="text-align: center; color: black;" id="islemTablosu">
-			<tr align="center" style="text-align: center">
-				<td colspan="12">TARIM ARAZİLERİNİN <strong><label
-						style="text-align: center;" id="tipLabelTxt"> &nbsp;</label> </strong>
-					YOLUYLA DEVRİ
-				</td>
 
-			</tr>
+	<!-- class="tableSatis" -->
+	<table id="islemTablosu">
+		<tr align="center" style="text-align: center">
+			<td colspan="12">TARIM ARAZİLERİNİN <strong><label
+					style="text-align: center;" id="tipLabelTxt"> &nbsp;</label> </strong>
+				YOLUYLA DEVRİ
+			</td>
+
+		</tr>
+		<tr>
+			<td rowspan="2">İŞLEM TİPİ</td>
+			<td rowspan="2">TARİH</td>
+			<td rowspan="2">İLÇE</td>
+			<td rowspan="2">EVRAK NO</td>
+			<td rowspan="2">MAHALLE</td>
+			<td colspan="2">DEVRİ İSTENEN</td>
+			<td colspan="2">İZİN VERİLEN</td>
+			<td colspan="2">İZİN VERİLMEYEN</td>
+			<td rowspan="2">NİTELİK</td>
+		</tr>
+		<tr>
+			<td>Parsel Sayısı</td>
+			<td>Alan (m<sup>2</sup>)
+			</td>
+			<td>Parsel Sayısı</td>
+			<td>Alan (m<sup>2</sup>)
+			</td>
+			<td>Parsel Sayısı</td>
+			<td>Alan (m<sup>2</sup>)
+			</td>
+		</tr>
+		<form:form action="ekle" method="GET" commandName="araziIslem"
+			>
+			<form:hidden path="id" />
 			<tr>
-				<td rowspan="2">İŞLEM TİPİ</td>
-				<td rowspan="2">TARİH</td>
-				<td rowspan="2">İLÇE</td>
-				<td rowspan="2">EVRAK NO</td>
-				<td rowspan="2">MAHALLE</td>
-				<td colspan="2">DEVRİ İSTENEN</td>
-				<td colspan="2">İZİN VERİLEN</td>
-				<td colspan="2">İZİN VERİLMEYEN</td>
-				<td rowspan="2">NİTELİK</td>
-			</tr>
-			<tr>
-				<td>Parsel Sayısı</td>
-				<td>Alan (m<sup>2</sup>)
-				</td>
-				<td>Parsel Sayısı</td>
-				<td>Alan (m<sup>2</sup>)
-				</td>
-				<td>Parsel Sayısı</td>
-				<td>Alan (m<sup>2</sup>)
-				</td>
-			</tr>
-<tr>
 				<td><form:input path="islemTipi" id="satisTipi"
 						style="border: none;" readonly="readonly"
 						placeHolder="Satış Tipi..." /></td>
@@ -510,18 +524,17 @@ label {
 					placeholder="Nitelik" name="nitelik">--></td>
 			</tr>
 			<%-- <c:if test="${tusYazisi == 'Kaydet'}"> --%>
-			<tr style="background-color: #ffd480" id="kaydet">
+			<tr  id="kaydet">
 				<td colspan="12"><input id="kaydetBtn" type="button"
 					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
-					style="border: none; background-color: #e68a00"></td>
+				></td>
 			</tr>
 			<%-- </c:if>
 			<c:if test="${tusYazisi == 'Güncelle'}"> --%>
-			<tr style="background-color: #ffd480" id="guncelle">
+			<tr  id="guncelle">
 				<td colspan="12"><input id="guncelleBtn" type="button"
 					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
-					style="border: none; background-color: #80bfff"> <input
-					type="button" class="btn btn-success" value="Vazgeç"
+					> <input type="button" class="btn btn-success" value="Vazgeç"
 					onclick="javascript:location.href='./vazgec'"
 					style="border: none; background-color: #e68a00"></td>
 			</tr>
@@ -549,7 +562,8 @@ label {
 					<td>${islem.nitelik}</td>
 				</tr>
 			</c:forEach> --%>
-		</table>
-	</form:form>
+		</form:form>
+	</table>
+
 
 </div>

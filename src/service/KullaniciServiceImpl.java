@@ -65,4 +65,14 @@ public class KullaniciServiceImpl implements KullaniciService {
 		kullaniciDAO.kullaniciEkle(kullanici);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see service.KullaniciService#aktifKullaniciListesi(java.lang.Boolean)
+	 */
+	@Override
+	public List<Kullanici> aktifKullaniciListesi(char durum) {
+		return kullaniciDAO.aktifKullaniciListesi(durum);
+	}
+
 }

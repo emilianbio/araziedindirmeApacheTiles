@@ -20,5 +20,6 @@ public interface AraziDAO {
 
 	public JSONArray ilceyeGöreListele(String ilce);
 
-	public JSONArray ayalaraGoreToplamGetir(String yil, String birinciAy, String ikinciAy, String ucuncuAy);
+	public JSONArray ayalaraGoreToplamGetir(String yil, String birinciAy,
+			String ikinciAy, String ucuncuAy);
 }

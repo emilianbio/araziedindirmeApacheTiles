@@ -3,13 +3,27 @@
  */
 package dao;
 
+import java.util.List;
+
 import forms.Arac;
 
 /**
- * @author EMRAH
+ * @author lenovo
  *
  */
 public interface AracDAO {
+	public void save(Arac arac);
 
-	public void kaydet(Arac arac);
+	public void delete(Long id);
+
+	public Arac aracCikisGetir(Long id);
+
+	public List<Arac> tumAracCikislari();
+
+	public List<Arac> kullaniciyaGoreCikisListesi(Long kullaniciID);
+
+	public List<Arac> ozelPlakayaGoreCikisListesi(String plaka);
+
+	public List<Arac> resmiPlakayaGoreCikisListesi(String plaka);
+
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import service.AraziService;
 import forms.AraziİslemHareketleri;
+import service.AraziService;
 
 @Controller
 @RequestMapping(value = "/satis-cesitleri")

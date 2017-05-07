@@ -13,6 +13,8 @@ public interface KullaniciService {
 	public List<Kullanici> kullanGetir(Long id);
 
 	public Kullanici kullaniciGetirr(Long id);
-	
+
 	public void kullaniciEkle(Kullanici kullanici);
+	
+	public List<Kullanici> aktifKullaniciListesi(char durum);
 }

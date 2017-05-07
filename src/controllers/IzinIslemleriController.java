@@ -3,6 +3,7 @@
  */
 package controllers;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,9 @@ public class IzinIslemleriController {
 	public Kullanici kullanici1;
 
 	@RequestMapping(value = "/izin-formu")
-	public ModelAndView izin(@ModelAttribute("izinFormu") IzinIslemleri izinIslem, Long id, ModelMap model) {
+	public ModelAndView izin(
+			@ModelAttribute("izinFormu") IzinIslemleri izinIslem, Long id,
+			ModelMap model) {
 		// Genel.setKullaniciBean(null);
 
 		if (izin == null) {
@@ -118,7 +121,8 @@ public class IzinIslemleriController {
 		nesne.put("istenenIzinGunSayisi", izinler.getTalepEdilenIzinGunSayisi());
 		nesne.put("cepTelefonu", izinler.getPersonelId().getCepTelefonu());
 		nesne.put("ePosta", izinler.getPersonelId().getePosta());
-		nesne.put("yedekPersonelAdi", izinler.getYedekPersonel().getIsimSoyisim());
+		nesne.put("yedekPersonelAdi", izinler.getYedekPersonel()
+				.getIsimSoyisim());
 		// nesne.put("yedekPersonelUnvan",
 		// izinler.getYedekPersonel().getUnvan());
 		array.add(nesne);
@@ -130,8 +134,51 @@ public class IzinIslemleriController {
 	public String izinGuncelle(@PathVariable("id") Long id) {
 
 		izin = izinIslemleriService.izinGetir(id);
+		izin.setTalepEdilenIzinGunSayisi(0);
+		int suAnkiYil = Calendar.getInstance().getWeekYear();
+		int toplamIzin = izin.getDevirIzinGunSayisi()
+				+ izin.getKalanIzinGunSayisi();
+		Calendar islemZamani = Calendar.getInstance();
+		islemZamani.setTime(izin.getIslemZamani());
+		int sonIzinYili = islemZamani.get(Calendar.YEAR);
+		System.out.println(izin.getPersonelId().getIsimSoyisim() + " "
+				+ izin.getKalanIzinGunSayisi() + " xxxxx");
+		System.out.println(suAnkiYil - sonIzinYili);
 
-		// izin.setOlurSayisi(null);
+		if (suAnkiYil - sonIzinYili > 2)								//en son, en az 3 yıl önce izin kullanmışsa
+			if (izin.getPersonelId().getIzinHakki() == 2) {				//izin hakkı 20 gün ise
+				izin.setDevirIzinGunSayisi(20);							//öceki yıldan yeni yıla 20 gün aktar
+				izin.setKalanIzinGunSayisi(20);							//yeni yıl için 20 günlük yeni hak ver
+
+			} else if (izin.getPersonelId().getIzinHakki() == 3) {		//izin hakkı 30 gün ise
+				izin.setDevirIzinGunSayisi(30);							//öceki yıldan yeni yıla 30 gün aktar
+				izin.setKalanIzinGunSayisi(30);							//yeni yıl için 30 günlük yeni hak ver
+
+			}
+
+		if (suAnkiYil - sonIzinYili != 0)
+			if (izin.getPersonelId().getIzinHakki() == 2)//izin hakkı 20 gün ise
+				if (toplamIzin <= 20) // yeni yılda hak ettiği izin hariç önceki yıllardan gelen toplam izin gün sayısı 20den "AZ" ise
+
+				{
+					izin.setDevirIzinGunSayisi(izin.getKalanIzinGunSayisi()); //önceki yıldan yeni yıla kalan izinleri aktar
+					izin.setKalanIzinGunSayisi(20);//yeni yıl için 20 günlük yeni hak ver
+				}
+
+				else {				//yeni yılda hak ettiği izin hariç toplam izin gün sayısı 20den "FAZLA" ise
+					izin.setDevirIzinGunSayisi(20);//öceki yıldan yeni yıla 20 gün aktar
+					izin.setKalanIzinGunSayisi(20);//yeni yıl için 20 günlük yeni hak ver
+				}
+
+			else if (izin.getPersonelId().getIzinHakki() == 3)//izin hakkı 30 gün ise
+				if (toplamIzin <= 30) {// yeni yılda hak ettiği izin hariç önceki yıllardan gelen toplam izin gün sayısı 30den "AZ" ise
+					izin.setDevirIzinGunSayisi(izin.getKalanIzinGunSayisi());//önceki yıldan yeni yıla kalan izinleri aktar
+					izin.setKalanIzinGunSayisi(30);//yeni yıl için 30 günlük yeni hak ver
+				} else {// yeni yılda hak ettiği izin hariç önceki yıllardan gelen toplam izin gün sayısı 30den "FAZLA" ise
+					izin.setDevirIzinGunSayisi(30);//öceki yıldan yeni yıla 30 gün aktar
+					izin.setKalanIzinGunSayisi(30);//yeni yıl için 30 günlük yeni hak ver
+				}
+
 		return "redirect:/izin-islemleri/izin-formu";
 	}
 

@@ -5,17 +5,17 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div class="header-yerler">
 
+
+
+<div class="header-yerler">
 	<form:form method="get" action="sabitonay" commandName="tips"
 		class="form-inline">
 		<form:hidden path="id" />
 		<div class="col-sm-8">
-			<table clAss="table">
-
+			<table clAss="table1">
 				<tr>
 					<td><label> ÜLKE</label></td>
-
 					<td><form:select path="tip.tip.tip.id" class="form-control"
 							onChange="ikisibirada(this.value)" id="slctTipler">
 							<form:option value="0">Seçiniz</form:option>
@@ -23,7 +23,6 @@
 								itemLabel="isim" />
 						</form:select></td>
 				</tr>
-
 				<tr>
 					<td><form:label path="id">Şehir</form:label></td>
 					<td><form:select path="tip.tip.id" id="slctAltTip"
@@ -70,34 +69,37 @@
 			</table>
 		</div>
 	</form:form>
-</div>
-<table id="models" class="yerlertable header-yerler table table-striped">
-	<tr>
-		<th>Sil</th>
-		<th>edit</th>
-		<th>Sıra</th>
-		<th>isim</th>
-		<th>ekleme tarihi</th>
-		<th>durum</th>
-		<!-- <th>kaydeden</th> -->
-	</tr>
 
-	<c:forEach items="${modelListesi}" var="sabitTips" varStatus="no">
-		<tr id="satirno${sabitTips.id}">
-			<td><input type="image"
-				src="<c:url value="/resources/images/Delete-32.png" />" width="21px"
-				onclick="tipsil(${sabitTips.id})" title="Silmek İçin Tıklayın" /></td>
-			<td><a
-				href="${pageContext.request.contextPath}/yer-ekleme/edit/${sabitTips.id}"><input
-					type="image" src="<c:url value="/resources/images/duzenle.png" />"
-					width="21px" title="Değiştirmek İçin Tıklayın" /></a></td>
-			<td class="td">${no.count}</td>
-			<td class="td">${sabitTips.isim}</td>
-			<td class="td"><fmt:formatDate value="${sabitTips.eklemezamani}"
-					pattern="dd.MM.yyyy HH:mm:ss" /></td>
-			<td class="td">${sabitTips.durum}</td>
-			<%-- <td class="td">${sabitTips.memurs.isim}</td> --%>
+	<table id="models"
+		class="yerlertable table-striped">
+		<tr>
+			<th>Sil</th>
+			<th>edit</th>
+			<th>Sıra</th>
+			<th>isim</th>
+			<th>ekleme tarihi</th>
+			<th>durum</th>
+			<!-- <th>kaydeden</th> -->
 		</tr>
-	</c:forEach>
-</table>
 
+		<c:forEach items="${modelListesi}" var="sabitTips" varStatus="no">
+			<tr id="satirno${sabitTips.id}">
+				<td><input type="image"
+					src="<c:url value="/resources/images/Delete-32.png" />"
+					width="21px" onclick="tipsil(${sabitTips.id})"
+					title="Silmek İçin Tıklayın" /></td>
+				<td><a
+					href="${pageContext.request.contextPath}/yer-ekleme/edit/${sabitTips.id}"><input
+						type="image" src="<c:url value="/resources/images/duzenle.png" />"
+						width="21px" title="Değiştirmek İçin Tıklayın" /></a></td>
+				<td class="td">${no.count}</td>
+				<td class="td">${sabitTips.isim}</td>
+				<td class="td"><fmt:formatDate
+						value="${sabitTips.eklemezamani}" pattern="dd.MM.yyyy HH:mm:ss" /></td>
+				<td class="td">${sabitTips.durum}</td>
+				<%-- <td class="td">${sabitTips.memurs.isim}</td> --%>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
+${sayfa}

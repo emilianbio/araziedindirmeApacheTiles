@@ -44,19 +44,19 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 	private int devriIstenenParselSayisi;
 
 	@Column(name = "devri_istenen_parsel_alani")
-	private Float devriIstenenParselAlani;
+	private Long devriIstenenParselAlani;
 
 	@Column(name = "izin_verilen_parsel_sayisi")
 	private int izinVerilenParselSayisi;
 
 	@Column(name = "izin_verilen_parsel_alani")
-	private Float izinVerilenParselAlani;
+	private Long izinVerilenParselAlani;
 
 	@Column(name = "izin_verilmeyen_parsel_sayisi")
 	private int izinVerilmeyenParselSayisi;
 
 	@Column(name = "izin_verilmeyen_parsel_alani")
-	private Float izinVerilmeyenParselAlani;
+	private Long izinVerilmeyenParselAlani;
 
 	@Column(name = "nitelik")
 	private String nitelik;
@@ -133,11 +133,11 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 		this.devriIstenenParselSayisi = devriIstenenParselSayisi;
 	}
 
-	public Float getDevriIstenenParselAlani() {
+	public Long getDevriIstenenParselAlani() {
 		return devriIstenenParselAlani;
 	}
 
-	public void setDevriIstenenParselAlani(Float devriIstenenParselAlani) {
+	public void setDevriIstenenParselAlani(Long devriIstenenParselAlani) {
 		this.devriIstenenParselAlani = devriIstenenParselAlani;
 	}
 
@@ -149,11 +149,11 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 		this.izinVerilenParselSayisi = izinVerilenParselSayisi;
 	}
 
-	public Float getIzinVerilenParselAlani() {
+	public Long getIzinVerilenParselAlani() {
 		return izinVerilenParselAlani;
 	}
 
-	public void setIzinVerilenParselAlani(Float izinVerilenParselAlani) {
+	public void setIzinVerilenParselAlani(Long izinVerilenParselAlani) {
 		this.izinVerilenParselAlani = izinVerilenParselAlani;
 	}
 
@@ -165,11 +165,11 @@ public class AraziİslemHareketleri implements java.io.Serializable {
 		this.izinVerilmeyenParselSayisi = izinVerilmeyenParselSayisi;
 	}
 
-	public Float getIzinVerilmeyenParselAlani() {
+	public Long getIzinVerilmeyenParselAlani() {
 		return izinVerilmeyenParselAlani;
 	}
 
-	public void setIzinVerilmeyenParselAlani(Float izinVerilmeyenParselAlani) {
+	public void setIzinVerilmeyenParselAlani(Long izinVerilmeyenParselAlani) {
 		this.izinVerilmeyenParselAlani = izinVerilmeyenParselAlani;
 	}
 

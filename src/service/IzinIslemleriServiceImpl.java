@@ -53,4 +53,13 @@ public class IzinIslemleriServiceImpl implements IzinIslemleriService {
 		return izinDao.izinGetir(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see service.IzinIslemleriService#izinleriGuncelle(forms.IzinIslemleri)
+	 */
+	@Override
+	public void izinleriGuncelle(IzinIslemleri izinIslemleri) {
+		izinDao.izinSureleriniGuncelle(izinIslemleri);
+		
+	}
+
 }

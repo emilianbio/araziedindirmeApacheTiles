@@ -39,8 +39,23 @@ function ikisibiradamarkalar(id) {
 	if (id == 0) {
 		ikisibirada(jq("#slctTipler").val());
 	} else {
-		markaGetir(id);
-		modelGetir(id);
+		 markaGetir(id);
+		 modelGetir(id);
+	}
+}
+
+
+function ikisibirad(id) {
+	altTipleriGetir(id);
+	modelGetir(id);
+}
+function ikisibiradamarkala(id) {
+	if (id == 0) {
+		ikisibirada(jq("#slctTipler").val());
+	} else {
+		// markaGetir(id);
+		markaGeti(id);
+		// modelGetir(id);
 	}
 }
 
@@ -72,7 +87,7 @@ function modelGetir(altTipId) {
 
 function modelleriListele(gelen) {
 	// alert("modellerilistele");
-	var trHTML = '<div class="yerlertable"><table class="yerlertable table table-striped"><tr class="success"><th>Sil</th><th>Düzenle</th><th>Sıra No</th><th>İsim</th><th>Ekleme Tarihi</th><th>Durum</th><th>Kaydeden</th></tr></table></div>';
+	var trHTML = '<tr><th>Sil</th><th>Düzenle</th><th>Sıra No</th><th>İsim</th><th>Ekleme Tarihi</th><th>Durum</th><th>Kaydeden</th></tr>';
 	jq
 			.each(
 					gelen,
@@ -92,16 +107,13 @@ function modelleriListele(gelen) {
 								+ '<a href="../yer-ekleme/edit/'
 								+ item.id
 								+ '"><input type="image" src="../resources/images/duzenle.png" width="25px" title="Değiştirmek İçin Tıklayın" /></a>'
-								+ '</td><td>'
-								+ parseInt(i + 1)
-								+ '</td><td><a href="#"  onclick="ikisibiradamarkalar('
-								+ item.id + ')" >  ' + item.isim
-								+ '</a></td><td>' + item.ekleme + '</td><td>'
-								+ item.durum + '</td><td>' + item.kaydeden
-								+ '</td></tr>';
+								+ '</td><td>' + parseInt(i + 1) + '</td><td>'
+								+ item.isim + '</td><td>' + item.ekleme
+								+ '</td><td>' + item.durum + '</td><td>'
+								+ item.kaydeden + '</td></tr>';
 					});
 
-	jq('.yerlertable.table.table-striped').html(trHTML);
+	jq('.table-striped').html(trHTML);
 }
 
 function tipsil(id) {
@@ -120,9 +132,7 @@ function tipsil(id) {
 				jq('#satirno' + id).remove();
 			},
 			error : function(xhr, textStatus, errorThrown) {
-				console.log(xhr);
-				alert(xhr + "----" + "-----" + textStatus + "------"
-						+ errorThrown);
+				alert(textStatus);
 			}
 		});
 	}
@@ -153,6 +163,35 @@ function markaGetir(altTipId) {
 	jq.ajax({
 		type : "POST",
 		url : "./markagetir",
+		dataType : "JSON",
+		contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+		data : {
+			altTipId : altTipId
+		},
+		success : function(gelen) {
+			var select = jq('#slctMarka');
+			if (select.prop) {
+				var options = select.prop('options');
+			} else {
+				var options = select.attr('options');
+			}
+			jq('option', select).remove();
+			options[options.length] = new Option("Seçiniz", 0);
+			jq.each(gelen, function(id, adi) {
+				options[options.length] = new Option(adi, id);
+			});
+		},
+		error : function(xhr, textStatus, errorThrown) {
+		}
+	});
+}
+
+function markaGeti(altTipId) {
+
+//	alert("merkaGeti çalıştı..");
+	jq.ajax({
+		type : "POST",
+		url : "./markageti",
 		dataType : "JSON",
 		contentType : "application/x-www-form-urlencoded;charset=UTF-8",
 		data : {

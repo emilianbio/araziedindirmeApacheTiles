@@ -33,8 +33,7 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 		 * eğer session.open() kullansaydık manuel olarak session kapatmamız
 		 * (session.close()) gerekecekti.
 		 */
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
-				Kullanici.class);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Kullanici.class);
 		// criteria.add(Example.create(kullanici));
 		criteria.add(Restrictions.eq("isimSoyisim", isim));
 		criteria.add(Restrictions.eq("sifre", sifre));
@@ -51,8 +50,7 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 	@Override
 	@Transactional
 	public List<Kullanici> kullanici() {
-		Criteria critKullanici = sessionFactory.getCurrentSession()
-				.createCriteria(Kullanici.class);
+		Criteria critKullanici = sessionFactory.getCurrentSession().createCriteria(Kullanici.class);
 		critKullanici.addOrder(Order.asc("isimSoyisim"));
 		List<Kullanici> kullaniciListe = critKullanici.list();
 
@@ -63,20 +61,18 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 	@Override
 	@Transactional
 	public List<Kullanici> kullaniciGetir(Long id) {
-		Criteria critKullanici = sessionFactory.getCurrentSession()
-				.createCriteria(Kullanici.class);
+		Criteria critKullanici = sessionFactory.getCurrentSession().createCriteria(Kullanici.class);
+
 		critKullanici.add(Restrictions.eq("id", id));
+//		ProjectionList projList = Projections.projectionList();
+//		projList.add(Projections.property("isimSoyisim"));
+//		projList.add(Projections.property("sicilNo"));
+//		projList.add(Projections.property("birim"));
+//		projList.add(Projections.property("unvan"));
+//		projList.add(Projections.property("cepTelefonu"));
+//		projList.add(Projections.property("ePosta"));
+//		critKullanici.setProjection(Projections.distinct(projList));
 
-		ProjectionList projList = Projections.projectionList();
-		projList.add(Projections.property("isimSoyisim"));
-		projList.add(Projections.property("sicilNo"));
-		projList.add(Projections.property("birim"));
-		projList.add(Projections.property("unvan"));
-		projList.add(Projections.property("cepTelefonu"));
-		projList.add(Projections.property("ePosta"));
-		critKullanici.setProjection(Projections.distinct(projList));
-
-		critKullanici.addOrder(Order.asc("isimSoyisim"));
 		return critKullanici.list();
 	}
 
@@ -84,9 +80,8 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 	@Override
 	@Transactional
 	public Kullanici kullaniciGetirr(Long id) {
-		 org.hibernate.Session session = sessionFactory.openSession();
-		Kullanici kullanici = (Kullanici) sessionFactory.getCurrentSession()
-				.load(Kullanici.class, id);
+		org.hibernate.Session session = sessionFactory.openSession();
+		Kullanici kullanici = (Kullanici) sessionFactory.getCurrentSession().load(Kullanici.class, id);
 		kullanici.getId();
 		return kullanici;
 	}
@@ -96,6 +91,23 @@ public class KullaniciDAOImpl implements KullaniciDAO {
 	public void kullaniciEkle(Kullanici kullanici) {
 		sessionFactory.getCurrentSession().saveOrUpdate(kullanici);
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao.KullaniciDAO#aktifKullaniciListesi(java.lang.Boolean)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Kullanici> aktifKullaniciListesi(char durum) {
+		Criteria critKullanici = sessionFactory.getCurrentSession().createCriteria(Kullanici.class);
+		critKullanici.addOrder(Order.asc("isimSoyisim"));
+		critKullanici.add(Restrictions.eq("durum", durum));
+		List<Kullanici> kullaniciListe = critKullanici.list();
+
+		return kullaniciListe;
 	}
 
 }

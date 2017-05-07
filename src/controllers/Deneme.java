@@ -3,8 +3,6 @@
  */
 package controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author Emrah Denizer
@@ -22,19 +20,22 @@ public class Deneme {
 	public static int toplamIzinGunSayisi = 0;
 
 	public static void main(String[] args) {
-		Date yeniYil = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+		System.out.println(s(5));
+		System.out.println(f(5));
 
-		String newDate = sdf.format(yeniYil);
-
-		if (newDate.equals("15/11")) {
-
-			toplamIzinGunSayisi = kalanİzinSayisi + 20;
-
-			System.out.println(toplamIzinGunSayisi);
-		} else {
-			System.out.println(newDate);
-		}
+		// Date yeniYil = new Date();
+		// SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+		//
+		// String newDate = sdf.format(yeniYil);
+		//
+		// if (newDate.equals("15/11")) {
+		//
+		// toplamIzinGunSayisi = kalanİzinSayisi + 20;
+		//
+		// System.out.println(toplamIzinGunSayisi);
+		// } else {
+		// System.out.println(newDate);
+		// }
 
 	}
 
@@ -44,5 +45,17 @@ public class Deneme {
 
 		return kalanİzinSayisi;
 
+	}
+
+	public static int s(int n) {
+		if (n == 0)
+			return 0;
+		return s(n - 1) + n;
+	}
+
+	public static int f(int n) {
+		if (n == 0)
+			return 1;
+		return f(n - 1) * n;
 	}
 }

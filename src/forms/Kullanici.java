@@ -28,12 +28,13 @@ public class Kullanici implements Serializable {
 
 	@Column(name = "isim_soyisim")
 	private String isimSoyisim;
-	
-	@Column(name = "adi")
-	private String adi;
 
 	@Column(name = "sifre")
 	private String sifre;
+
+	@Column(name = "adi")
+	private String adi;
+
 
 	@Column(name = "unvan")
 	private String unvan;
@@ -68,7 +69,7 @@ public class Kullanici implements Serializable {
 
 	@Column(name = "durum")
 	private char durum;
-	
+
 	@Column(name = "izin_hakki")
 	private Integer izinHakki;
 
@@ -96,6 +97,20 @@ public class Kullanici implements Serializable {
 		this.sifre = sifre;
 	}
 
+	/**
+	 * @return the adi
+	 */
+	public String getAdi() {
+		return adi;
+	}
+
+	/**
+	 * @param adi
+	 *            the adi to set
+	 */
+	public void setAdi(String adi) {
+		this.adi = adi;
+	}
 	// public Unvanlar getUnvan() {
 	// return unvan;
 	// }
@@ -150,14 +165,6 @@ public class Kullanici implements Serializable {
 
 	public void setIzinHakki(Integer izinHakki) {
 		this.izinHakki = izinHakki;
-	}
-
-	public String getAdi() {
-		return adi;
-	}
-
-	public void setAdi(String adi) {
-		this.adi = adi;
 	}
 
 }

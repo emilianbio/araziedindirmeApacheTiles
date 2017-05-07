@@ -19,7 +19,7 @@ html, body {
 
 #chartContainer {
 	border-bottom: 2px solid grey;
-	margin: 15% 35%;
+	margin: 5% 35%;
 	padding: 20px;
 	padding-bottom: 0px;
 }
@@ -46,7 +46,8 @@ body {
 }
 
 input {
-	background-image: url("<c:url value="/ resources/ images/ bicerdover.jpg " />");
+	background-color: rgba(255, 255, 255, 0.19);
+	/*background-image: url("<c:url value="/ resources/ images/ bicerdover.jpg " />");*/
 	filter: alpha(opacity : 0.9);
 	KHTMLOpacity: 0.40;
 	MozOpacity: 0.40;
@@ -54,7 +55,7 @@ input {
 	height: 25px;
 	border: none;
 	border-bottom-color: 1px solid grey;
-	border-right: 1px solid grey;
+	border-right: 0px solid grey;
 	outline: none;
 	background-color: none;
 	font-style: inherit;
@@ -94,5 +95,6 @@ input {
 				id="girisBtn">
 		</form>
 	</div>
+	${exception }
 </body>
 </html>

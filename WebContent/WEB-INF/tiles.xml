@@ -50,5 +50,17 @@
 			value="/WEB-INF/jsp/SatisCesitleri/Satis.jsp" />
 	</definition>
 
+	<definition name="aractakip" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/AraziCikis/AracTakip.jsp" />
+	</definition>
+
+	<definition name="rapor" extends="base.definition">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/Raporlar/SatisRaporlari.jsp" />
+	</definition>
+
 
 </tiles-definitions> 

@@ -30,9 +30,11 @@ public class KullaniciController {
 		if (Genel.kullaniciBean == null) {
 			Genel.kullaniciBean = new Kullanici();
 		}
-		ModelAndView modelAndView = new ModelAndView("KullaniciIslemleri/KullaniciDuzenle");
+		ModelAndView modelAndView = new ModelAndView(
+				"KullaniciIslemleri/KullaniciDuzenle");
 		modelAndView.addObject("kullanici", Genel.kullaniciBean);
-		modelAndView.addObject("kullaniciListesi", kullaniciService.kullanici());
+		modelAndView
+				.addObject("kullaniciListesi", kullaniciService.kullanici());
 		modelAndView.addObject("title", "Kullanici Bilgileri");
 
 		return modelAndView;

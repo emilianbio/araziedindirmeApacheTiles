@@ -16,4 +16,6 @@ public interface KullaniciDAO {
 
 	public void kullaniciEkle(Kullanici kullanici);
 
+	public List<Kullanici> aktifKullaniciListesi(char durum);
+
 }

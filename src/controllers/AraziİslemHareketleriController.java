@@ -3,12 +3,14 @@
  */
 package controllers;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +42,8 @@ public class AraziİslemHareketleriController {
 	public Long id = null;
 
 	@RequestMapping(value = "/satis")
-	public ModelAndView Satis(ModelMap model, @ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri) {
+	public ModelAndView Satis(ModelMap model, @ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri,
+			@CookieValue(value = "id", required = true) Long id) {
 
 		Genel.setKullaniciBean(null);
 		if (arazi == null) {
@@ -59,66 +62,59 @@ public class AraziİslemHareketleriController {
 		tusYazisi = "Kaydet";
 		islemHareketleri.setId(0);
 		arazi = null;
-		return modelAndView;
+		try {
+			if (id != null)
+				return modelAndView;
+			else {
+
+				return new ModelAndView("/");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			ModelAndView hataSayfasi = new ModelAndView("/");
+			hataSayfasi.addObject("exception", e);
+
+			return hataSayfasi;
+
+		}
 	}
 
 	@RequestMapping(value = "/ekle")
-	public String satis(
-			@ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri, ModelMap model) {
-		System.out.println("ekleye basıldı.....");
-//		Kullanici kullanici = new Kullanici();
-//		kullanici.setId(1);
-//
-//		System.out.println("cookie ID: " + id);
-//
-//		System.out.println("kullanıcı adı soyadı : " + kullanici.getIsimSoyisim());
-//
-//		System.out.println(islemHareketleri.getTarih());
-//
-//		islemHareketleri.setDevriIstenenParselAlani((float) 1.0);
-//		islemHareketleri.setDevriIstenenParselSayisi(1);
-//		islemHareketleri.setEvrakNo(0l);
-//		islemHareketleri.setIlce("Sarıçam");
-//		islemHareketleri.setIslemZamani(new Date());
-//		islemHareketleri.setIzinVerilenParselAlani((float) 1.0);
-//		islemHareketleri.setIzinVerilenParselSayisi(1);
-//		islemHareketleri.setIzinVerilmeyenParselAlani((float) 0.0);
-//		islemHareketleri.setIzinVerilmeyenParselSayisi(0);
-//		islemHareketleri.setKullanici(kullanici);
-//		islemHareketleri.setMahalle("Sofulu");
-//		islemHareketleri.setNitelik("3083");
-//		islemHareketleri.setTarih("2016-5-5");
-//
-		try {
-			araziService.save(islemHareketleri);
-		} catch (Exception e) {
-			// 
-			System.err.println(e.getMessage());
-		}
-//
-//		 islemHareketleri.setId(0);
-//		 ModelAndView modelAndView = new
-//		 ModelAndView("redirect:/satis-cesitleri/satis");
-//		
-//		 islemHareketleri.setDevriIstenenParselAlani(null);
-//		 islemHareketleri.setDevriIstenenParselSayisi(0);
-//		 islemHareketleri.setEvrakNo(0);
-//		 islemHareketleri.setIlce(null);
-//		 islemHareketleri.setIslemZamani(null);
-//		 islemHareketleri.setIzinVerilenParselAlani(null);
-//		 islemHareketleri.setIzinVerilenParselSayisi(0);
-//		 islemHareketleri.setIzinVerilmeyenParselAlani(null);
-//		 islemHareketleri.setIzinVerilmeyenParselSayisi(0);
-//		 islemHareketleri.setKullanici(null);
-//		 islemHareketleri.setMahalle(null);
-//		 islemHareketleri.setNitelik(null);
-//		 islemHareketleri.setTarih(null);
-//		arazi = null;
-//
-//		 modelAndView.addObject("araziIslem", arazi);
-//		tusYazisi = "Kaydet";
-//		 modelAndView.addObject("tusYazisi", tusYazisi);
-		return ("redirect:satis");
+	public ModelAndView Satis2(@CookieValue(value = "id") Long id,
+			@ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri, ModelMap model)
+			throws ParseException {
+
+		Kullanici kullanici = new Kullanici();
+		kullanici.setId(id);
+
+		System.out.println(islemHareketleri.getTarih());
+		islemHareketleri.setKullanici(kullanici);
+		islemHareketleri.setIslemZamani(new Date());
+		araziService.save(islemHareketleri);
+
+		islemHareketleri.setId(0);
+		ModelAndView modelAndView = new ModelAndView("redirect:/satis-cesitleri/satis");
+
+		islemHareketleri.setDevriIstenenParselAlani(null);
+		islemHareketleri.setDevriIstenenParselSayisi(0);
+		islemHareketleri.setEvrakNo(0);
+		islemHareketleri.setIlce(null);
+		islemHareketleri.setIslemZamani(null);
+		islemHareketleri.setIzinVerilenParselAlani(null);
+		islemHareketleri.setIzinVerilenParselSayisi(0);
+		islemHareketleri.setIzinVerilmeyenParselAlani(null);
+		islemHareketleri.setIzinVerilmeyenParselSayisi(0);
+		islemHareketleri.setKullanici(null);
+		islemHareketleri.setMahalle(null);
+		islemHareketleri.setNitelik(null);
+		islemHareketleri.setTarih(null);
+		arazi = null;
+
+		System.out.println(arazi + "güncellendi");
+		modelAndView.addObject("araziIslem", arazi);
+		tusYazisi = "Kaydet";
+		modelAndView.addObject("tusYazisi", tusYazisi);
+		return new ModelAndView("redirect:/satis-cesitleri/satis");
 	}
 
 	@RequestMapping(value = "/araziIslemDuzelt/{id}")

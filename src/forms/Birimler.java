@@ -44,4 +44,4 @@
 //	public void setBirimAdi(String birimAdi) {
 //		this.birimAdi = birimAdi;
 //	}
-//}
+// }

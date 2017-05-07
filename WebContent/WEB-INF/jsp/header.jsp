@@ -14,7 +14,7 @@
 	var jq = jQuery.noConflict();
 
 	jq(document).ready(function() {
-		jq(".hakkinda").mouseover(function() {
+		jq(".arazi").mouseover(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -26,7 +26,7 @@
 
 		})
 
-		jq(".hakkinda").mouseleave(function() {
+		jq(".arazi").mouseleave(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -37,7 +37,7 @@
 
 		})
 
-		jq(".iletisim").mouseover(function() {
+		jq(".satis").mouseover(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -49,7 +49,7 @@
 
 		})
 
-		jq(".iletisim").mouseleave(function() {
+		jq(".satis").mouseleave(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -60,7 +60,7 @@
 
 		})
 
-		jq(".login").mouseover(function() {
+		jq(".cikis").mouseover(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -72,7 +72,7 @@
 
 		})
 
-		jq(".login").mouseleave(function() {
+		jq(".cikis").mouseleave(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -83,7 +83,7 @@
 
 		})
 
-		jq(".urunler").mouseover(function() {
+		jq(".mahalle").mouseover(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -95,7 +95,7 @@
 
 		})
 
-		jq(".urunler").mouseleave(function() {
+		jq(".mahalle").mouseleave(function() {
 			//	alert("iletisim");
 
 			jq('#nav-bar').css({
@@ -118,7 +118,7 @@
 
 			<div id="nav-logo"></div>
 			<div id="nav-brand">
-				<a href="?">Arazi Edindirme Şube Müdürlüğü</a>
+				<a href="?">ARAZİ EDİNDİRME ŞB. MD.</a>
 			</div>
 
 			<div id="nav-container">
@@ -126,22 +126,30 @@
 				<div id="nav-bar-container">
 					<div id="nav-bar"></div>
 				</div>
-				<div class="nav login">
-					<a href="${pageContext.request.contextPath}/">Sisteme Giriş</a>
+				<div class="nav raporlar">
+					<a href="${pageContext.request.contextPath}/raporlar/satisrapor">
+						Raporlar</a>
 				</div>
-				<div class="nav iletisim">
+
+				<div class="nav cikis">
+					<a href="${pageContext.request.contextPath}/"><span
+						class="cikisSpan">Çıkış</span></a>
+				</div>
+				<div class="nav satis">
 					<a href="${pageContext.request.contextPath}/satis-cesitleri/satis">Satış
 						İşlemleri</a>
 				</div>
-				<div class="nav hakkinda">
+				<div class="nav arazi">
 					<a
 						href="${pageContext.request.contextPath}/arazi-cikislari/arac-islemleri">Arazi
 						Çıkışları</a>
 				</div>
-				<div class="nav urunler">
+				<div class="nav mahalle">
 					<a href="${pageContext.request.contextPath}/yer-ekleme/sabitler">
-						Ürünler</a>
+						Mahalle Ekleme</a>
 				</div>
+
+
 
 			</div>
 		</div>

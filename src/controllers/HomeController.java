@@ -1,5 +1,8 @@
 package controllers;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
@@ -7,13 +10,13 @@ import java.util.Date;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,34 +25,6 @@ import service.KullaniciService;
 
 @Controller
 public class HomeController {
-
-	@RequestMapping(value = "homePage")
-	public String anasayfa(ModelMap model, String[] args) {
-		// araclar.Main.main(args);
-		model.put("title", "Pahara Anasayfa");
-
-		if (kullanici == null) {
-			kullanici = new Kullanici();
-
-		}
-		model.put("kullanici", kullanici);
-		return "homePage";
-	}
-
-	@RequestMapping(value = "hellomello")
-	public String home(ModelMap model, String[] args) {
-		// araclar.Main.main(args);
-		model.put("title", "Pahara Anasayfa");
-		return "hello";
-	}
-
-	@RequestMapping(value = "contact")
-	public String contact(ModelMap model) {
-
-		model.put("title", "Contact Manager");
-		return "contact";
-	}
-
 	@Autowired
 	private KullaniciService kullaniciService;
 	private Kullanici kullanici;
@@ -73,7 +48,6 @@ public class HomeController {
 		response.addCookie(cookie1);
 		response.addCookie(cookie2);
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
 		ModelAndView modelAndView = new ModelAndView("index");
 		modelAndView.addObject("girisBasarili", giris);
 		modelAndView.addObject("title", "GİRİŞ ");
@@ -83,20 +57,41 @@ public class HomeController {
 
 	@RequestMapping(value = "/anasayfa")
 	public ModelAndView giris(ModelMap model, HttpServletResponse response) {
-		ModelAndView modelAndView = new ModelAndView("giris");
+		ModelAndView modelAndView = new ModelAndView("hello");
 		modelAndView.addObject("girisBasarili", giris);
 		modelAndView.addObject("title", "Anasayfa ");
 		return modelAndView;
 	}
 
-	@SuppressWarnings("unused")
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/gonder")
+	public ModelAndView gonder(@RequestParam(value = "giris") String giris2, ModelMap model,
+			HttpServletResponse response) throws IOException {
+		ModelAndView modelAndView = new ModelAndView("redirect:/anasayfa");
+
+		String giris3 = "C:\\Users\\Emrah Denizer\\Web Projelerim\\araziedindirme\\" + giris2;
+
+		int some = 0;
+		for (int i = 0; i <= 20; i++) {
+			some += i;
+			System.out.println(some);
+
+			PrintWriter out = new PrintWriter(new FileWriter(giris3 + ".doc", true), true);
+			out.write((Integer.toString(i) + " " + Integer.toString(some)));
+			out.write(System.getProperty("line.separator"));
+			out.close();
+
+		}
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView kullaniciOnay(@ModelAttribute("kullanici") Kullanici kullanici,
 			@RequestParam(value = "isimSoyisim") String isim, @RequestParam(value = "sifre") String sifre,
 			HttpServletRequest request, HttpServletResponse response, ModelMap model)
 			throws UnsupportedEncodingException {
 		// kullanici.toString();
-		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		kullanici.setBirim(null);
 		kullanici.setCepTelefonu(0);
 		kullanici.setePosta(null);
@@ -106,36 +101,32 @@ public class HomeController {
 		Kullanici kayitliKullanici = kullaniciService.kullaniciGiris(isim, sifre);
 		System.out.println(kullanici.getIsimSoyisim());
 		System.out.println("logine basıldı" + " " + new Date());
-
-		String isim0 = kayitliKullanici.getAdi();
-		String[] ilkisim = isim0.split(" ");
-
 		if (kayitliKullanici == null) {
-			request.setCharacterEncoding("UTF-8");
-			JOptionPane panel = new JOptionPane();
-			JOptionPane.showMessageDialog(panel, "Yanlış Bilgi Girdiniz....", "Hatalı Giriş",
-					JOptionPane.ERROR_MESSAGE);
+			response.setCharacterEncoding("UTF-8");
+//			JOptionPane panel = new JOptionPane();
+//			JOptionPane.showMessageDialog(panel, "Yanlış Bilgi Girdiniz....", "Hatalı Giriş",
+//					JOptionPane.ERROR_MESSAGE);
 			System.out.println("Giriş Yapılamadı" + " " + new Date());
 			return new ModelAndView("redirect:/");
 		} else {
 
 			Cookie cookieId = new Cookie("id", Long.toString(kayitliKullanici.getId()));
-			Cookie cookieIsim = new Cookie("isim", ilkisim[0]);
-
+			Cookie cookieIsim = new Cookie("isim", kayitliKullanici.getIsimSoyisim());
 			// response.setCharacterEncoding("UTF-8");
 			String valueId = URLDecoder.decode(cookieId.getValue(), "UTF-8");
 			String valueIsim = URLDecoder.decode(cookieIsim.getValue(), "UTF-8");
-			System.out.println("cookie isim / " + cookieIsim.getValue().trim());
-			System.out.println("cookie id / " + cookieId.getValue().trim());
+			System.out.println("cookie isim / " + cookieIsim.getValue());
+			System.out.println("cookie id / " + cookieId.getValue());
 			System.out.println("value isim / " + valueIsim);
 			System.out.println("value id / " + valueId);
 
+			
+			response.addCookie(cookieIsim);
 			response.addCookie(new Cookie("isim", valueIsim));
 			response.addCookie(new Cookie("id", valueId));
-			request.setCharacterEncoding("utf-8");
-			response.setContentType("text/html");
+
 			System.out.println("Giriş Başarılı.." + " " + new Date());
-			return new ModelAndView("redirect:/satis-cesitleri/satis");
+			return new ModelAndView("redirect:/anasayfa");
 		}
 	}
 }

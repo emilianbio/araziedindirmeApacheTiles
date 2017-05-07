@@ -38,7 +38,7 @@ public class Yerler implements java.io.Serializable {
 	private Boolean durum;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "eklemezamani")
+	@Column(name = "islemzamani")
 	private Date eklemezamani;
 
 	@ManyToOne

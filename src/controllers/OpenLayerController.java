@@ -3,14 +3,11 @@ package controllers;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import service.OpenLayersService;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,10 +16,6 @@ import forms.OpenLayer;
 
 @Controller
 public class OpenLayerController {
-	@SuppressWarnings("unused")
-	@Autowired
-	private OpenLayersService openLayerService;
-
 	@RequestMapping(value = "ol", method = RequestMethod.GET)
 	public String openlayer(ModelMap modelMap) {
 
@@ -33,7 +26,8 @@ public class OpenLayerController {
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@RequestMapping(value = "/jsonKaydet")
-	public String jsonKaydet(@RequestParam("data") String str, OpenLayer openLayer) throws ParseException {
+	public String jsonKaydet(@RequestParam("data") String str,
+			OpenLayer openLayer) throws ParseException {
 
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(str);

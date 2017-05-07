@@ -583,8 +583,16 @@
 					readonly="readonly"></td>
 
 			</tr>
+			<tr>
+				<td><a href="../raporlar/raporAl">TÜM ÇIKIŞ RAPORLARI</a></td>
+			</tr>
+			<tr>
+				<td>${dosyaDurumu}</td>
+			</tr>
 		</tbody>
 	</table>
+
+
 </div>
 <input type="button" id="toExcel" onclick="javascript:printDiv2('box2')"
 	class="btn btn-success" value="Yazdır - PDF Olarak Kaydet">
