@@ -1,24 +1,24 @@
 {
 	"sDecimal":        ",",
-	"sEmptyTable":     "Tabloda herhangi bir veri mevcut deÄŸil",
-	"sInfo":           "_TOTAL_ kayÄ±ttan _START_ - _END_ arasÄ±ndaki kayÄ±tlar gÃ¶steriliyor",
-	"sInfoEmpty":      "KayÄ±t yok",
-	"sInfoFiltered":   "(_MAX_ kayÄ±t iÃ§erisinden bulunan)",
+	"sEmptyTable":     "Tabloda herhangi bir veri mevcut değil",
+	"sInfo":           "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+	"sInfoEmpty":      "Kayıt yok",
+	"sInfoFiltered":   "(_MAX_ kayıt içerisinden bulunan)",
 	"sInfoPostFix":    "",
 	"sInfoThousands":  ".",
-	"sLengthMenu":     "Sayfada _MENU_ kayÄ±t gÃ¶ster",
-	"sLoadingRecords": "YÃ¼kleniyor...",
-	"sProcessing":     "Ä°ÅŸleniyor...",
+	"sLengthMenu":     "Sayfada _MENU_ kayıt göster",
+	"sLoadingRecords": "Yükleniyor...",
+	"sProcessing":     "İşleniyor...",
 	"sSearch":         "Ara:",
-	"sZeroRecords":    "EÅŸleÅŸen kayÄ±t bulunamadÄ±",
+	"sZeroRecords":    "İstenen kayıt bulunamadı",
 	"oPaginate": {
-		"sFirst":    "Ä°lk",
+		"sFirst":    "İlk",
 		"sLast":     "Son",
 		"sNext":     "Sonraki",
-		"sPrevious": "Ã–nceki"
+		"sPrevious": "Önceki"
 	},
 	"oAria": {
-		"sSortAscending":  ": artan sÃ¼tun sÄ±ralamasÄ±nÄ± aktifleÅŸtir",
-		"sSortDescending": ": azalan sÃ¼tun soralamasÄ±nÄ± aktifleÅŸtir"
+		"sSortAscending":  ": artan sütun sıralamasını aktifleştir",
+		"sSortDescending": ": azalan sütun sıralamasını aktifleştir"
 	}
 }

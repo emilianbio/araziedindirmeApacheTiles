@@ -14,85 +14,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="<c:url value="/assets/gthbLogo.png"/>" />
 <title>Error |AraziEdindirme</title>
-<!-- <link rel="stylesheet"
-	href="http://openlayers.org/en/v3.18.2/css/ol.css" type="text/css"> -->
-<!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-<!-- <script
-	src="http://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script> -->
-<link href="<c:url value="/assets/css/bootstrap.min.css" />"
+
+<!-- Bootstrap core CSS -->
+<link href='<c:url value="/resources/css/bootstrap.min.css"/>'
 	rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link
-	href="<c:url value="/assets/font-awesome/css/font-awesome.min.css"/>"
+	href='<c:url value= "/resources/css/ie10-viewport-bug-workaround.css"/>'
 	rel="stylesheet">
-<link href="<c:url value="/assets/css/style.css" />" rel="stylesheet">
-<link rel="stylesheet"
-	href="<c:url value="/assets/css/jquery.dataTables.min.css" />"
-	type="text/css">
-<!-- scripts -->
-<script src="<c:url value="/assets/script/jquery-3.1.0.min.js" />"
-	type="text/javascript"></script>
-<script src="<c:url value="/assets/script/bootstrap.min.js" />"
-	type="text/javascript"></script>
-<script src='<c:url value="/assets/script/canvasjs.min.js"   ></c:url>'
-	type="text/javascript"></script>
-<!-- <script src="http://openlayers.org/en/v3.18.2/build/ol.js"
-	type="text/javascript"></script> -->
 
+<!-- Custom styles for this template -->
+<link href='<c:url value="/resources/css/dashboard.css" />'
+	rel="stylesheet">
 
-<!-- <script src="//code.jquery.com/jquery-1.12.3.js"></script>  datatable js  -->
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script
-	src='<c:url value="/assets/script/jquery.dataTables.min.js"  ></c:url>'></script>
-<script
-	src='<c:url value="/assets/script/jquery.table2excel.js"  ></c:url>'></script>
+	src='<c:url value= "/resources/css/ie-emulation-modes-warning.js"/>'></script>
 
-<script src='<c:url value="/assets/script/genel2.js"  ></c:url>'></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	jQuery(function() {
-		// #sidebar-toggle-button
-		jQuery('#sidebar-toggle-button').on('click', function() {
-			jQuery('#sidebar').toggleClass('sidebar-toggle');
-			jQuery('#page-content-wrapper').toggleClass('page-content-toggle');
-			fireResize();
-		});
-
-		// sidebar collapse behavior
-		jQuery('#sidebar').on('show.bs.collapse', function() {
-			jQuery('#sidebar').find('.collapse.in').collapse('hide');
-		});
-
-		// To make current link active
-		(function addActiveToNestedList() {
-			var pageURL = jQuery(location).attr('href');
-			var URLSplits = pageURL.split('/');
-
-			var routeURL = '/' + URLSplits[URLSplits.length - 2] + '/'
-					+ URLSplits[URLSplits.length - 1];
-			var activeNestedList = jQuery(
-					'.sub-menu > li > a[href$="' + routeURL + '"]').parent();
-
-			if (activeNestedList.length !== 0
-					&& !activeNestedList.hasClass('active')) {
-				jQuery('.sub-menu > li').removeClass('active');
-				activeNestedList.addClass('active');
-			}
-		})();
-
-		function fireResize() {
-			if (document.createEvent) { // W3C
-				var ev = document.createEvent('Event');
-				ev.initEvent('resize', true, true);
-				window.dispatchEvent(ev);
-			} else { // IE
-				element = document.documentElement;
-				var event = document.createEventObject();
-				element.fireEvent("onresize", event);
-			}
-		}
-
-	})
+	window.jQuery
+			|| document
+					.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
 </script>
-
-
+<script src="<c:url value="/resources/script/dist/bootstrap.min.js"/>"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   <script
+		src="<c:url value= "/resources/css/ie10-viewport-bug-workaround.js"/>"></script>
+    <script src="<c:url value="/resources/dist/bootstrap.min.js"/>"></script>
+    
+<link rel="shortcut icon"
+	href="<c:url value="/resources/images/bakanlik.png"/>" />
 
 </head>
 <body>
