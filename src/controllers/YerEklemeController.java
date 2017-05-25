@@ -43,7 +43,7 @@ public class YerEklemeController {
 	private String tusYazisi = "Ekle";
 
 	@RequestMapping(value = "/sabitler")
-	public String sabitlers(HttpSession session, ModelMap model, @CookieValue(value = "id") Long id) {
+	public String sabitlers(HttpSession session, ModelMap model, @CookieValue(value = "id", required = true) Long id) {
 		model.put("modelListesi", yerEklemeService.tipGetir());
 		if (tips == null) {
 			tips = new Yerler();
@@ -99,8 +99,7 @@ public class YerEklemeController {
 
 	@RequestMapping(value = "/sabitonay", method = RequestMethod.GET)
 	public String ekleme(HttpSession session, HttpServletResponse response, @ModelAttribute("tips") Yerler yer,
-			@ModelAttribute("kullanici") Kullanici kullanici,
-			@CookieValue(value = "memurid", required = false) Long memurid) {
+			@ModelAttribute("kullanici") Kullanici kullanici, @CookieValue(value = "id", required = true) Long id) {
 
 		if (yer.getTip().getTip().getTip().getId() == 0)
 
@@ -120,7 +119,7 @@ public class YerEklemeController {
 	}
 
 	@RequestMapping(value = "/edit/{id}")
-	public String sabitEdit(@PathVariable("id") Long Id) {
+	public String sabitEdit(@PathVariable("id") Long Id, @CookieValue(value = "id", required = true) Long id) {
 		tips = yerEklemeService.tipsGetir(Id);
 		tusYazisi = "Güncelle";
 		return "redirect:/yer-ekleme/sabitler";
@@ -141,7 +140,8 @@ public class YerEklemeController {
 
 	@RequestMapping(value = "/tipsil", method = RequestMethod.POST)
 	public @ResponseBody String tipsil(@RequestParam(value = "id", required = true) Long id,
-			@CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter, HttpServletResponse response) {
+			@CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter, HttpServletResponse response,
+			@CookieValue(value = "id", required = true) Long cookieId) {
 		yerEklemeService.tipsil(id);
 		response.setCharacterEncoding("UTF-8");
 
@@ -157,8 +157,8 @@ public class YerEklemeController {
 	@RequestMapping(value = "/tipsekle", method = RequestMethod.POST)
 	public @ResponseBody byte[] tipsekle(@RequestParam(value = "isim", required = true) String isim,
 			@RequestParam(value = "katid", required = true) Long katid,
-			@RequestParam(value = "durum", required = true) Boolean durum, HttpServletResponse response)
-			throws Exception {
+			@RequestParam(value = "durum", required = true) Boolean durum, HttpServletResponse response,
+			@CookieValue(value = "id", required = true) Long id) throws Exception {
 		Yerler tipsi = new Yerler();
 		tipsi.setIsim(isim);
 		tipsi.setTip(new Yerler(katid));
@@ -170,7 +170,7 @@ public class YerEklemeController {
 	@RequestMapping(value = "/markagetir", method = RequestMethod.POST)
 	@ResponseBody
 	public byte[] markaGetir(@RequestParam(value = "altTipId", required = true) Long altTipId,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, @CookieValue(value = "id", required = true) Long id) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		List<Yerler> altTipListesi = new ArrayList<Yerler>();
 		altTipListesi = yerEklemeService.altTipGetir(altTipId, true);

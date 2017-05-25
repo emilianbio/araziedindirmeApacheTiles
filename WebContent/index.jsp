@@ -46,7 +46,7 @@ body {
 }
 
 input {
-	background-color: rgba(255, 255, 255, 0.19);
+	background-color: rgba(255, 255, 255, 0.50);
 	/*background-image: url("<c:url value="/ resources/ images/ bicerdover.jpg " />");*/
 	filter: alpha(opacity : 0.9);
 	KHTMLOpacity: 0.40;

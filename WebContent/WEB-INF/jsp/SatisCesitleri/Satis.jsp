@@ -5,15 +5,29 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+input {
+	width: 5em;
+}
+
+#date {
+	width: 9em;
+}
+
+label {
+	display: inline-block;
+}
+</style>
+
+
+
 <script type="text/javascript">
 	var jq = jQuery.noConflict();
 	var id = parseInt('${araziIslem.id}');
 	jq("#yanlisBilgi").hide();
-	jq(".xx1").remove();
+
 	jq(document).ready(
-
 			function() {
-
 				console.log("güncellenecek Id: " + id);
 				/* console.log(jq("#satirno" + id)); */
 				if (id == 0) {
@@ -45,7 +59,7 @@
 
 	function islemTipineGöreTabloGetir(islemTipi) {
 
-		jq("#islemTablosu").find("tr:gt(6)").remove();//toggle(1000).empty();
+		jq("#islemTablosu").find("tr:gt(6)").empty();//toggle(1000).empty();
 		jq
 				.ajax({
 					type : "GET",
@@ -149,6 +163,11 @@
 	}) */
 	function ekle() {
 
+		if (jq("#date").val() == "" || jq("#date").val() == null) {
+			alert("! Tarih Seçiniz")
+			return true;
+		}
+
 		if (jq("#izinVerilenParselSayisi").val() == ""
 				|| jq("#izinVerilenParselSayisi").val() == null) {
 			jq("#izinVerilenParselSayisi").val("0")
@@ -171,7 +190,8 @@
 				"#devriIstenenParselSayisi").val())
 				|| parseInt(jq("#izinVerilenParselAlani").val())
 						+ parseInt(jq("#izinVerilmeyenParselAlani").val()) != parseInt(jq(
-						"#devriIstenenParselAlani").val())) {
+						"#devriIstenenParselAlani").val())
+				|| jq("#date").val() == "" || jq("#date").val() == null) {
 			console.log("------------");
 			console.log(jq("#devriIstenenParselSayisi").val());
 			console.log(parseInt(jq("#izinVerilenParselSayisi").val())
@@ -179,7 +199,6 @@
 			jq("#yanlisBilgi").show();
 			return false;
 		}
-
 		console.log(new Date());
 		var form = jq('#myForm').serialize();
 		if (!confirm("Eklemek İstediğinize Emin misiniz?"))
@@ -187,15 +206,14 @@
 		jq
 				.ajax({
 					data : form,
-					type : 'get',
+					type : 'post',
 					dataType : 'html',
-					url : '../satis-cesitleri/ekle',
+					url : '${pageContext.request.contextPath}/satis-cesitleri/ekle',
 					xhrFields : {
 						withCredentials : true
 					},
 					success : function(content) {
-						alert("Bilgiler Başarıyla Kaydedildi..." + " "
-								+ content);
+						alert("Bilgiler Başarıyla Kaydedildi...");
 					},
 					complete : function(data) {
 
@@ -207,7 +225,7 @@
 									success : function(idData) {
 										if (('${araziIslem.id}') != 0) {
 
-											//	window.location.href = '${pageContext.request.contextPath}/satis-cesitleri/satis';
+											window.location.href = '${pageContext.request.contextPath}/satis-cesitleri/satis';
 
 										} else {
 											var girilenDegerler = "<tr class="+"ayirici" + "><td>"
@@ -342,6 +360,13 @@
 			jq("#nitelik").val("Satış");
 			jq("#chartContainer").show("fade");
 		}
+
+		if (jq("#tipSelect").val() == "İFRAZ") {
+			jq("#tipLabelTxt").text("İFRAZ");
+			jq("#satisTipi").val("İFRAZ");
+			jq("#nitelik").val("Satış");
+			jq("#chartContainer").show("fade");
+		}
 	}
 
 	function kapat() {
@@ -350,94 +375,36 @@
 
 	}
 </script>
-<!-- <style>
-select {
-	background: transparent;
-	-webkit-appearance: none;
-}
-
-option {
-	background: transparent;
-	-webkit-appearance: none;
-}
-
-input {
-	width: 150px;
-	background: transparent;
-	border-left: none;
-	border-top: none;
-	border-bottom-color: rgba(50, 50, 50, .4);
-	border-right-color: rgba(50, 50, 50, .4);
-	outline: none;
-}
-
-.date {
-	width: 9em;
-}
-
-label {
-	display: inline-block;
-}
-
-#islemTablosu td {
-	color: white;
-	filter: alpha(opacity : 1);
-	KHTMLOpacity: 0.40;
-	MozOpacity: 0.40;
-	opacity: 1;
-}
-
-#islemTablosu a {
-	color: white !important;
-}
-
-#islemTablosu a:HOVER {
-	color: red !important;
-}
+<br>
+<select id="tipSelect" style="border: none;" name="islemTipi"
+	onchange="islemTipineGöreTabloGetir(this.value);tipDegistir()">
+	<option value="0">Lütfen İşlem Tipini Seçiniz..---</option>
+	<option value="SATIŞ (5403)">SATIŞ (5403)</option>
+	<option value="VASIF">VASIF</option>
+	<option value="MİRAS">MİRAS</option>
+	<option value="3083">3083</option>
+	<option value="İFRAZ">İFRAZ</option>
+</select>
 
 
-</style> -->
-<style>
-#yanlisBilgi {
-	color: black !important;
-	z-index: 20000;
-	display: none;
-	border-radius: 5px;
-	text-align: center;
-	top: 50%;
-	left: 50%;
-	box-sizing: border-box;
-	border: 5px groove #ffb3d1;
-	font-size: 20px;
-	position: fixed;
-	background-color: white;
-	-webkit-transform: translate(-50%, -50%);
-	opacity: 1;
-	filter: alpha(opacity = 90);
-	width: 70%;
-	height: 35%;
-}
-</style>
 
-<div class="header-satis">
-	<select id="tipSelect" style="border: none;" name="islemTipi"
-		onchange="islemTipineGöreTabloGetir(this.value);tipDegistir()">
-		<option value="0">Lütfen İşlem Tipini Seçiniz..---</option>
-		<option value="SATIŞ (5403)">SATIŞ (5403)</option>
-		<option value="VASIF">VASIF</option>
-		<option value="MİRAS">MİRAS</option>
-		<option value="3083">3083</option>
-	</select>
-	<div id='yanlisBilgi'>
-		<table>
+<div id="chartContainer" style="border: 1px; border-color: red;">
+
+	<div id='yanlisBilgi'
+		style='z-index: 20000; display: none; margin-left: 50px; border-radius: 5px; text-align: center; top: 50%; left: 75%; box-sizing: border-box; left: 50%; border: 5px groove #ffb3d1; font-size: 20px; position: fixed; background-color: white; -webkit-transform: translate(-50%, -50%); opacity: 1; filter: alpha(opacity = 90); width: 70%; height: 35%;'>
+
+
+
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<td><img width="50px" src="../resources/images/loading.gif"></td>
+					<td><img width="50px" src="../assets/images/loading.gif"></td>
 				</tr>
 			</thead>
+
 			<tr>
-				<td>Girilen Parsel Sayıları veya Alanları Birbirini
-					Tutmuyor....!!!!</td>
+				<td>--Girilen parsel sayıları veya alanları birbirini tutmuyor
+					olabilir</td>
 			</tr>
 			<tr>
 				<td>Lütfen Kontrol Ederek Tekrar Deneyiniz...</td>
@@ -446,43 +413,47 @@ label {
 				<td><input type="button" value="KAPAT" onclick="kapat();"
 					class="btn btn-success"></td>
 			</tr>
+
 		</table>
+
+
 	</div>
 
-	<!-- class="tableSatis" -->
-	<table id="islemTablosu">
-		<tr align="center" style="text-align: center">
-			<td colspan="12">TARIM ARAZİLERİNİN <strong><label
-					style="text-align: center;" id="tipLabelTxt"> &nbsp;</label> </strong>
-				YOLUYLA DEVRİ
-			</td>
 
-		</tr>
-		<tr>
-			<td rowspan="2">İŞLEM TİPİ</td>
-			<td rowspan="2">TARİH</td>
-			<td rowspan="2">İLÇE</td>
-			<td rowspan="2">EVRAK NO</td>
-			<td rowspan="2">MAHALLE</td>
-			<td colspan="2">DEVRİ İSTENEN</td>
-			<td colspan="2">İZİN VERİLEN</td>
-			<td colspan="2">İZİN VERİLMEYEN</td>
-			<td rowspan="2">NİTELİK</td>
-		</tr>
-		<tr>
-			<td>Parsel Sayısı</td>
-			<td>Alan (m<sup>2</sup>)
-			</td>
-			<td>Parsel Sayısı</td>
-			<td>Alan (m<sup>2</sup>)
-			</td>
-			<td>Parsel Sayısı</td>
-			<td>Alan (m<sup>2</sup>)
-			</td>
-		</tr>
-		<form:form action="ekle" method="GET" commandName="araziIslem"
-			>
-			<form:hidden path="id" />
+	<form:form action="#" method="post" commandName="araziIslem"
+		id="myForm">
+		<form:hidden path="id" />
+		<table border="" class="table" style="text-align: center;"
+			id="islemTablosu">
+			<tr align="center" style="text-align: center">
+				<td colspan="12">TARIM ARAZİLERİNİN <strong><label
+						style="text-align: center;" id="tipLabelTxt"> &nbsp;</label> </strong>
+					YOLUYLA DEVRİ
+				</td>
+
+			</tr>
+			<tr>
+				<td rowspan="2">İŞLEM TİPİ</td>
+				<td rowspan="2">TARİH</td>
+				<td rowspan="2">İLÇE</td>
+				<td rowspan="2">EVRAK NO</td>
+				<td rowspan="2">MAHALLE</td>
+				<td colspan="2">DEVRİ İSTENEN</td>
+				<td colspan="2">İZİN VERİLEN</td>
+				<td colspan="2">İZİN VERİLMEYEN</td>
+				<td rowspan="2">NİTELİK</td>
+			</tr>
+			<tr>
+				<td>Parsel Sayısı</td>
+				<td>Alan (m<sup>2</sup>)
+				</td>
+				<td>Parsel Sayısı</td>
+				<td>Alan (m<sup>2</sup>)
+				</td>
+				<td>Parsel Sayısı</td>
+				<td>Alan (m<sup>2</sup>)
+				</td>
+			</tr>
 			<tr>
 				<td><form:input path="islemTipi" id="satisTipi"
 						style="border: none;" readonly="readonly"
@@ -524,17 +495,18 @@ label {
 					placeholder="Nitelik" name="nitelik">--></td>
 			</tr>
 			<%-- <c:if test="${tusYazisi == 'Kaydet'}"> --%>
-			<tr  id="kaydet">
+			<tr style="background-color: #ffd480" id="kaydet">
 				<td colspan="12"><input id="kaydetBtn" type="button"
-					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
-				></td>
+					onclick="ekle()" class="btn btn-success" value="${tusYazisi }"
+					style="border: none; background-color: #e68a00"></td>
 			</tr>
 			<%-- </c:if>
 			<c:if test="${tusYazisi == 'Güncelle'}"> --%>
-			<tr  id="guncelle">
+			<tr style="background-color: #ffd480" id="guncelle">
 				<td colspan="12"><input id="guncelleBtn" type="button"
-					onclick="ekle();" class="btn btn-success" value="${tusYazisi }"
-					> <input type="button" class="btn btn-success" value="Vazgeç"
+					onclick="ekle()" class="btn btn-success" value="${tusYazisi }"
+					style="border: none; background-color: #80bfff"> <input
+					type="button" class="btn btn-success" value="Vazgeç"
 					onclick="javascript:location.href='./vazgec'"
 					style="border: none; background-color: #e68a00"></td>
 			</tr>
@@ -562,8 +534,7 @@ label {
 					<td>${islem.nitelik}</td>
 				</tr>
 			</c:forEach> --%>
-		</form:form>
-	</table>
-
+		</table>
+	</form:form>
 
 </div>

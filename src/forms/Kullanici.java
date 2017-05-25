@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -35,12 +37,27 @@ public class Kullanici implements Serializable {
 	@Column(name = "adi")
 	private String adi;
 
-
 	@Column(name = "unvan")
 	private String unvan;
 
 	@Column(name = "birim")
 	private String birim;
+
+	@ManyToOne
+	@JoinColumn(name = "role")
+	private UserRoles roles;
+
+	public UserRoles getRoles() {
+
+		if (roles == null) {
+			roles = new UserRoles();
+		}
+		return roles;
+	}
+
+	public void setRoles(UserRoles roles) {
+		this.roles = roles;
+	}
 
 	public String getUnvan() {
 		return unvan;
@@ -77,7 +94,7 @@ public class Kullanici implements Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -165,6 +182,51 @@ public class Kullanici implements Serializable {
 
 	public void setIzinHakki(Integer izinHakki) {
 		this.izinHakki = izinHakki;
+	}
+
+	public Kullanici() {
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	
+	/**
+	 * @param isimSoyisim
+	 * @param sifre
+	 * @param adi
+	 * @param unvan
+	 * @param birim
+	 * @param roles
+	 * @param sicilNo
+	 * @param cepTelefonu
+	 * @param ePosta
+	 * @param durum
+	 * @param izinHakki
+	 */
+	public Kullanici(String isimSoyisim, String sifre, String adi, String unvan, String birim, UserRoles roles,
+			String sicilNo, long cepTelefonu, String ePosta, char durum, Integer izinHakki) {
+		super();
+		this.isimSoyisim = isimSoyisim;
+		this.sifre = sifre;
+		this.adi = adi;
+		this.unvan = unvan;
+		this.birim = birim;
+		this.roles = roles;
+		this.sicilNo = sicilNo;
+		this.cepTelefonu = cepTelefonu;
+		this.ePosta = ePosta;
+		this.durum = durum;
+		this.izinHakki = izinHakki;
+	}
+
+	@Override
+	public String toString() {
+		return "Kullanici [id=" + id + ", isimSoyisim=" + isimSoyisim + ", sifre=" + sifre + ", adi=" + adi + ", unvan="
+				+ unvan + ", birim=" + birim + ", roles=" + roles + ", sicilNo=" + sicilNo
+				+ ", cepTelefonu=" + cepTelefonu + ", ePosta=" + ePosta + ", durum=" + durum + ", izinHakki="
+				+ izinHakki + "]";
 	}
 
 }

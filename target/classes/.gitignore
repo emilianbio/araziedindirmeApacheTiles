@@ -3,4 +3,5 @@
 /dao/
 /forms/
 /hibernate.cfg.xml
+/hibernate.cfg2.xml
 /service/

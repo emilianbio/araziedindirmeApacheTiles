@@ -1,33 +1,15 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import forms.Arac;
 import forms.AraziİslemHareketleri;
 import service.AracService;
 import service.AraziService;
@@ -55,8 +36,6 @@ public class RaporlarController {
 	AracService aracService;
 	public String islemTipi = "";
 	public AraziİslemHareketleri arazi;
-	public String dosyaDurumu = null;
-	public String download = "";
 
 	@RequestMapping(value = "/satisrapor")
 	public ModelAndView giris(@ModelAttribute("araziIslem") AraziİslemHareketleri araziİslemHareketleri, ModelMap model,
@@ -105,27 +84,41 @@ public class RaporlarController {
 			if (!(araziList.get(i).getDevriIstenenParselAlani() == araziList.get(i).getIzinVerilenParselAlani()
 					+ araziList.get(i).getIzinVerilmeyenParselAlani())) {
 
-				System.out.println("==================VERİTABANI HATALI VERİLER==================");
-				System.out.println(araziList.get(i).getTarih() + "-----");
+				System.out.println(i+". Hata "+"==================VERİTABANI HATALI VERİLER==================");
 
-				System.out.print(araziList.get(i).getId() + "---");
-				System.out.print(araziList.get(i).getDevriIstenenParselAlani() + "---");
-				System.out.print(araziList.get(i).getIzinVerilenParselAlani() + "---");
-				System.out.print(araziList.get(i).getIzinVerilmeyenParselAlani() + "---");
-				System.out.print(araziList.get(i).getIzinVerilenParselAlani()
-						+ araziList.get(i).getIzinVerilmeyenParselAlani() + "---");
+				System.out.println("İşlemi Yapan: " + araziList.get(i).getKullanici().getAdi());
+				System.out.println("İşlemi Tarihi: " + araziList.get(i).getIslemZamani());
+				System.out.println("İşlem Detayları: ");
+
+				System.out.print("ID: " + araziList.get(i).getId() + "---");
+
+				System.out.println(araziList.get(i).getTarih() + "-----");
+				System.out.print(
+						"Devri istenen parsel sayısı: " + araziList.get(i).getDevriIstenenParselSayisi() + "----");
+				System.out.println("Devri istenen parsel alanı: " + araziList.get(i).getDevriIstenenParselAlani());
+
+				System.out.print("İzin verilen parsel sayısı: " + araziList.get(i).getIzinVerilenParselSayisi() + "---");
+				System.out.println("İzin verilen parsel alanı: " + araziList.get(i).getIzinVerilenParselAlani());
+
+				System.out.print(
+						"İzin verilmeyen parsel sayısı: " + araziList.get(i).getIzinVerilmeyenParselSayisi() + "---");
 				System.out.println(
-						araziList.get(i).getDevriIstenenParselAlani() == araziList.get(i).getIzinVerilenParselAlani()
+						"İzin verilmeyen parsel alanı: " + araziList.get(i).getIzinVerilmeyenParselAlani() + "---");
+				System.out.println("Fark: ");
+				System.out.print("Sayı: ");
+				System.out.println((int) araziList.get(i).getDevriIstenenParselSayisi()
+						- (int) araziList.get(i).getIzinVerilenParselSayisi()
+						+ (int) araziList.get(i).getIzinVerilmeyenParselSayisi());
+				System.out.print("Alan: ");
+				System.out.println(
+						araziList.get(i).getDevriIstenenParselAlani() - araziList.get(i).getIzinVerilenParselAlani()
 								+ araziList.get(i).getIzinVerilmeyenParselAlani());
-				System.out.println("==================VERİTABANI HATALI VERİLER SON==================");
+			
+				System.out.println(i+". Hata "+"==================VERİTABANI HATALI VERİLER SON==================");
 			}
 
 		}
 
-		if (dosyaDurumu != null) {
-
-			modelAndView.addObject("dosyaDurumu", dosyaDurumu);
-		}
 		modelAndView.addObject("devriIstenenParselSayisi", devriIstenenParselSayisiToplami);
 		modelAndView.addObject("devriIstenenParselAlani", devriIstenenParselAlaniToplami);
 		modelAndView.addObject("izinVerilenParselSayisi", izinVerilenParselSayisiToplami);
@@ -134,9 +127,7 @@ public class RaporlarController {
 		modelAndView.addObject("izinVerilmeyenParselAlani", izinVerilmeyenParselAlaniToplami);
 		modelAndView.addObject("ilceler", araclar.Genel.ilcelers());
 		modelAndView.addObject("aylar", araclar.Genel.aylar());
-		modelAndView.addObject("download", download);
-		download = "";
-		dosyaDurumu = null;
+
 		return modelAndView;
 	}
 
@@ -300,107 +291,4 @@ public class RaporlarController {
 		return toplam;
 	}
 
-	@SuppressWarnings("resource")
-	@RequestMapping(value = "/raporAl")
-	public String personelAraCikisRaporu(@CookieValue(value = "isim") String isim)
-			throws ParseException, InvalidFormatException, IOException {
-		List<Arac> cikisListesi = aracService.tumAracCikislari();
-		String[] isimAyrac = isim.split("\\.");
-		String ayrilanIsim = isimAyrac[0];
-		String ayrilanSoyIsim = isimAyrac[1];
-		System.out.println("çıkış listesi uzunluğu " + cikisListesi.size());
-		String path = "D:\\PROGRAMLAR\\apache-tomcat-9.0.0.M17\\evraklar\\";
-		XWPFDocument document = new XWPFDocument();
-
-		// ustbaslik logo
-		// FileInputStream is = new FileInputStream(path + "bakanlik.png");
-		// document.addPictureData(is, 0);
-
-		// create table
-		XWPFTable table = document.createTable();
-		// table.setCellMargins(10, 10, 10, 10);
-
-		// üstbaşlık oluşturma
-		XWPFTableRow tableUstBaslik = table.getRow(0);
-		tableUstBaslik.getCell(0).setText("GIDA TARIM VE HAYVANCILIK BAKANLIĞI");
-		;
-
-		// create first row
-		XWPFTableRow tableRowOne = table.getRow(0);
-		tableRowOne.getCell(0).setText("Günler");
-		tableRowOne.addNewTableCell().setText("Gidilen Yer");
-		tableRowOne.addNewTableCell().setText("Gidiş Saati");
-		tableRowOne.addNewTableCell().setText("Geliş Saati");
-		tableRowOne.addNewTableCell().setText("Araç Palakası");
-		tableRowOne.addNewTableCell().setText("Yapılan İşin Özeti");
-
-		for (int i = 0; i < cikisListesi.size(); i++) {
-			String tamTarih = cikisListesi.get(i).getTarih();
-			String[] gunAyraci = tamTarih.split("-");
-			String gun = gunAyraci[2];
-
-			// create second row
-			XWPFTableRow tableRowTwo = table.createRow();
-
-			tableRowTwo.getCell(0).setText(gun);
-			tableRowTwo.getCell(1).setText(
-					cikisListesi.get(i).getIlce().getIsim() + "-" + cikisListesi.get(i).getMahalle().getIsim());
-			tableRowTwo.getCell(2).setText(cikisListesi.get(i).getCikisSaati());
-			tableRowTwo.getCell(3).setText(cikisListesi.get(i).getGirisSaati());
-
-			if (cikisListesi.get(i).getResmiPlaka() == null) {
-				tableRowTwo.getCell(4).setText(cikisListesi.get(i).getOzelPlaka());
-			} else {
-				tableRowTwo.getCell(4).setText(cikisListesi.get(i).getResmiPlaka());
-			}
-
-			tableRowTwo.getCell(5).setText(cikisListesi.get(i).getAciklama());
-
-			System.out.println(i + ". kayıt girildi");
-			System.out.println(cikisListesi.get(i).getTarih());
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		System.out.println(isim);
-		Date tarih = new Date();
-		System.out.println(sdf.format(tarih));
-		// path +
-		try {
-			FileOutputStream out = new FileOutputStream(
-					path + ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase() + ".docx");
-			document.write(out);
-			out.close();
-			dosyaDurumu = "Dosya Başarıyla Oluşturuldu...";
-			download = "DOLU";
-			System.out.println("dosya oluşturuldu...");
-			return "redirect:/raporlar/satisrapor";
-		} catch (Exception e) {
-			// TODO: handle exception
-			dosyaDurumu = "Dosya Oluşturma Başarısız.Lütfen Sitem Yöneticinizle Görüşün..." + e;
-			e.printStackTrace();
-			return "redirect:/raporlar/satisrapor";
-		}
-
-	}
-
-	@RequestMapping(value = "/download")
-	public String downloadPOIDoc(HttpServletResponse response, @CookieValue(value = "isim") String isim)
-			throws IOException {
-		String[] isimAyrac = isim.split("\\.");
-		String ayrilanIsim = isimAyrac[0];
-		String ayrilanSoyIsim = isimAyrac[1];
-		String filename = ayrilanIsim.toUpperCase() + " " + ayrilanSoyIsim.toUpperCase()
-				+ ".docx"/* path to a file */;
-		String path = "D:\\PROGRAMLAR\\apache-tomcat-9.0.0.M17\\evraklar\\";
-		File file = new File(path + filename);
-
-		response.setContentType(new MimetypesFileTypeMap().getContentType(file));
-		response.setContentLength((int) file.length());
-		response.setHeader("content-disposition", "attachment; filename=" + URLEncoder.encode(filename, "UTF-8"));
-
-		InputStream is = new FileInputStream(file);
-		FileCopyUtils.copy(is, response.getOutputStream());
-
-		return null;
-
-	}
 }

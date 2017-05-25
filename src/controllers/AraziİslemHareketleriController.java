@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +28,7 @@ import araclar.Genel;
 import forms.AraziİslemHareketleri;
 import forms.Kullanici;
 import service.AraziService;
+import service.KullaniciService;
 
 /**
  * @author Emrah Denizer
@@ -36,6 +40,8 @@ import service.AraziService;
 public class AraziİslemHareketleriController {
 	@Autowired
 	AraziService araziService;
+	@Autowired
+	KullaniciService kullaniciService;
 	public AraziİslemHareketleri arazi;
 	public String tusYazisi = "Kaydet";
 	public List<AraziİslemHareketleri> islemTipineGöreListe;
@@ -43,14 +49,14 @@ public class AraziİslemHareketleriController {
 
 	@RequestMapping(value = "/satis")
 	public ModelAndView Satis(ModelMap model, @ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri,
-			@CookieValue(value = "id", required = true) Long id) {
+			@CookieValue(value = "id") Long id) {
 
 		Genel.setKullaniciBean(null);
 		if (arazi == null) {
 			arazi = new AraziİslemHareketleri();
 		}
 
-		ModelAndView modelAndView = new ModelAndView("Satis");
+		ModelAndView modelAndView = new ModelAndView("SatisCesitleri/Satis");
 
 		modelAndView.addObject("tusYazisi", tusYazisi);
 		modelAndView.addObject("ilceler", araclar.Genel.ilcelers());
@@ -62,27 +68,13 @@ public class AraziİslemHareketleriController {
 		tusYazisi = "Kaydet";
 		islemHareketleri.setId(0);
 		arazi = null;
-		try {
-			if (id != null)
-				return modelAndView;
-			else {
-
-				return new ModelAndView("/");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			ModelAndView hataSayfasi = new ModelAndView("/");
-			hataSayfasi.addObject("exception", e);
-
-			return hataSayfasi;
-
-		}
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/ekle")
 	public ModelAndView Satis2(@CookieValue(value = "id") Long id,
-			@ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri, ModelMap model)
-			throws ParseException {
+			@ModelAttribute("araziIslem") AraziİslemHareketleri islemHareketleri, ModelMap model,
+			HttpServletRequest request, HttpServletResponse response) throws ParseException {
 
 		Kullanici kullanici = new Kullanici();
 		kullanici.setId(id);
@@ -144,10 +136,20 @@ public class AraziİslemHareketleriController {
 
 	@RequestMapping(value = "/islemTipineGöreListeGetir", method = RequestMethod.GET)
 	public @ResponseBody String islemTipineGöreListeGetir(
-			@RequestParam(value = "islemTipi", required = true) String islemTipi) {
+			@RequestParam(value = "islemTipi", required = true) String islemTipi,
+			@CookieValue(value = "id", required = false) Long id) {
 		Gson gson = new Gson();
 
-		return gson.toJson(araziService.islemTipineGöreListele(islemTipi));
+		Kullanici kullanici = kullaniciService.kullaniciGetirr(id);
+
+		if (kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_SUPER_ADMIN.toString())
+				|| kullanici.getRoles().getRollAdi().equals(araclar.RolesEnum.ROLE_AUTHORIZED_USER.toString())) {
+			return gson.toJson(araziService.islemTipineGöreListele(islemTipi));
+
+		} else {
+
+			return gson.toJson(araziService.islemTipineVePersoneleGöreListele(islemTipi, id));
+		}
 	}
 
 	@RequestMapping(value = "/id", method = RequestMethod.GET)

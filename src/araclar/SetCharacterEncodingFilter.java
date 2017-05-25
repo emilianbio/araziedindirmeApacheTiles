@@ -92,6 +92,8 @@ public class SetCharacterEncodingFilter implements Filter {
 		chain.doFilter(request, response);
 		// System.out.println("filtre: "+((HttpServletRequest)
 		// request).getRequestURI());
+		
+			
 	}
 
 	@Override
@@ -103,4 +105,6 @@ public class SetCharacterEncodingFilter implements Filter {
 	protected String selectEncoding(ServletRequest request) {
 		return (this.encoding);
 	}
+	
+	
 }

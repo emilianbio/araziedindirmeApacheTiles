@@ -45,13 +45,13 @@ a:hover {
 		border-bottom: 3px solid grey;
 	}
 	#kullaniciBilgileri {
-		height:30px;
+		height: 30px;
 		width: 100%;
 		border-bottom: 3px solid grey;
 		position: relative;
 	}
 	div.block {
-		display: block !impotant;
+		display: block!impotant;
 	}
 	#cookie a {
 		height: 30px;
@@ -417,7 +417,7 @@ a:hover {
 		position: relative;
 	}
 	.header-satis {
-		background: rgba(50, 50, 50, .5);
+		background: rgba(0, 0, 0, .2);
 		display: table;
 		position: absolute;
 		left: 1%;
@@ -442,5 +442,22 @@ a:hover {
 	}
 	#islemTablosu tr:hover {
 		background: rgba(50, 50, 50, 0.8);
+	}
+	::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+		color: #000;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color: #000;
+		opacity: 1;
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color: #000;
+		opacity: 1;
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: #000;
+	}
+	::-ms-input-placeholder { /* Microsoft Edge */
+		color: #000;
 	}
 }

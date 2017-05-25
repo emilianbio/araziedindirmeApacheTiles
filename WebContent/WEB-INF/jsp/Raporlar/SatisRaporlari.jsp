@@ -364,9 +364,26 @@
 		document.body.innerHTML = oldPage;
 	}
 
-	function printDiv2(box2) {
+	function printDiv2() {
 		//Get the HTML of div
 		var divElements = document.getElementById('tableDiv2').innerHTML;
+		//Get the HTML of whole page
+		var oldPage = document.body.innerHTML;
+		var src = "../assets/gthbLogo.png";
+		//Reset the page's HTML with div's HTML only
+		document.body.innerHTML = "<html><head><title>ADASDASD</title></head><body><table border=0 align='center'> <tr><td align=center> <image src="+src+"/>"
+				+ "</td></tr></table>" + divElements + "</body>";
+
+		//Print Page
+		window.print();
+
+		//Restore orignal HTML
+		document.body.innerHTML = oldPage;
+	}
+
+	function printDiv3(box2) {
+		//Get the HTML of div
+		var divElements = document.getElementById('tableDiv3').innerHTML;
 		//Get the HTML of whole page
 		var oldPage = document.body.innerHTML;
 		var src = "${pageContext.request.contextPath}/assets/gthbLogo.png";
@@ -386,6 +403,13 @@
 			islemTipineGöreTabloGetir(jq('input').val());
 		});
 	}); */
+
+	jq("#btnExport").on('click', function(e) {
+
+		alert("export basıldı");
+		window.open('data:application/msword,' + jq('#divTable3').html());
+		e.preventDefault();
+	});
 </script>
 <br>
 
@@ -464,9 +488,10 @@
 	<form style="background-color: #d3e7e8">
 
 		<select style="border: none;" name="yil" id="yil"
-			style="background: rgba(0, 0, 0, 0.3);">
+			onchange="ucAylikToplam();" style="background: rgba(0, 0, 0, 0.3);">
 			<option value="" label="--- Seçiniz ---" />
 			<option value="2016" label="2016" />
+			<option value="2017" label="2017" />
 		</select> <select style="border: none;" name="birinciAy" id="birinciAy"
 			onchange="ucAylikToplam()">
 			<option value="" label="--- Seçiniz ---" />
@@ -551,21 +576,27 @@
 
 
 <!------------------------------------------------------------------------------------------------------------------>
+<br>
+<br>
 <form:form commandName="araziIslem">
-	<form:select style="border: none;" path="ilce" id="ilce"
-		onchange=" ilceyeGöreTabloGetir(this.value)">
-		<form:option value="NONE" label="--- Seçiniz ---" />
-		<form:options items="${ilceler}"></form:options>
-	</form:select>
+	<fieldset>
+		<legend>İlçe Seçiniz</legend>
+		<form:select style="border: none;" path="ilce" id="ilce"
+			onchange=" ilceyeGöreTabloGetir(this.value)">
+			<form:option value="NONE" label="--- Seçiniz ---" />
+			<form:options items="${ilceler}"></form:options>
+		</form:select>
+	</fieldset>
 </form:form>
 
-<div id="tableDiv2">
+<div id="tableDiv3">
 
 	<table id="sonuc2" class="table">
 		<thead>
-			<tr>
+			<!--Tablodan İlçe Seçildikten Sonra Bu Etikete Seçilen İlçe Yazılıyor  -->
+			<!-- 	<tr>
 				<td><label> </label></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>İŞLEM</th>
 				<th>Devri İstenen Parsel Sayısı</th>
@@ -583,19 +614,9 @@
 					readonly="readonly"></td>
 
 			</tr>
-			<tr>
-				<td><a href="../raporlar/raporAl">TÜM ÇIKIŞ RAPORLARI</a></td>
-				<c:if test="${!empty download }">
-					<td><a href="../raporlar/download">İNDİR</a></td>
-				</c:if>
-			</tr>
-			<tr>
-				<td>${dosyaDurumu}</td>
-			</tr>
 		</tbody>
 	</table>
-
-
 </div>
-<input type="button" id="toExcel" onclick="javascript:printDiv2('box2')"
-	class="btn btn-success" value="Yazdır - PDF Olarak Kaydet">
+<input type="button" id="btnExport" class="btn btn-success"
+	value="Yazdır - PDF Olarak Kaydet" onclick="javascript:printDiv3()">
+
